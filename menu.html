@@ -143,12 +143,10 @@ header{
 }
 
 .menu-title{
+  font-size:30px;
+  font-weight:700;
   background:linear-gradient(90deg,#fff,#ff9d00);
-
-  background-clip:text;
   -webkit-background-clip:text;
-
-  color:transparent;
   -webkit-text-fill-color:transparent;
 }
 
@@ -391,21 +389,34 @@ header{
     font-size:16px;
   }
 }
-
 .toast{
   position:fixed;
-  bottom:100px;
+  top:20px;
   left:50%;
-  transform:translateX(-50%) translateY(20px);
-  background:#d84315;
+  transform:translateX(-50%) translateY(-30px);
+
+  background:rgba(255,255,255,0.12);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+
+  border:1px solid rgba(255,255,255,0.15);
+
   color:#fff;
-  padding:12px 20px;
-  border-radius:12px;
+  padding:14px 22px;
+  border-radius:18px;
+
+  font-size:15px;
   font-weight:600;
+
+  box-shadow:
+  0 8px 30px rgba(0,0,0,0.25);
+
   opacity:0;
   visibility:hidden;
-  transition:.3s;
-  z-index:3000;
+
+  z-index:99999;
+
+  transition:all .35s ease;
 }
 
 .toast.show{
@@ -413,9 +424,7 @@ header{
   visibility:visible;
   transform:translateX(-50%) translateY(0);
 }
-
 </style>
-
 </head>
 
 <body>
@@ -493,7 +502,20 @@ header{
 <!-- SCRIPT -->
 
 <script type="module">
+function showToast(message){
 
+  const toast =
+  document.getElementById("toast");
+
+  toast.textContent = message;
+
+  toast.classList.add("show");
+
+  setTimeout(()=>{
+    toast.classList.remove("show");
+  },1500);
+
+}
 import { initializeApp } from
 "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
 
@@ -815,23 +837,6 @@ function updateCount(){
 
 }
 
-function showToast(message){
-
-  const toast =
-  document.getElementById("toast");
-
-  toast.textContent = message;
-
-  toast.classList.add("show");
-
-  clearTimeout(toast.timer);
-
-  toast.timer = setTimeout(()=>{
-    toast.classList.remove("show");
-  },2000);
-
-}
-
 /* ADD ITEM */
 
 window.addItem =
@@ -861,10 +866,10 @@ function(id,name,price){
   }
 
   saveCart();
+  
+showToast(  `✨ ${name} added successfully`);
 
   updateCount();
-
-  showToast(name + " added to cart");
 
   render();
 
@@ -899,14 +904,11 @@ function(id,change){
 
 }
 
-
 /* INIT */
 
 updateCount();
 
 </script>
-
-<div class="toast" id="toast"></div>
-
+<div id="toast" class="toast"></div>
 </body>
 </html>
