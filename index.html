@@ -1,0 +1,1727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hotel Sree Divya Grand</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:#0b0b12;
+  color:white;
+  overflow-x:hidden;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:linear-gradient(135deg,rgba(255,120,0,0.08),rgba(255,255,255,0.02));
+  z-index:-2;
+}
+
+.glow{
+  position:fixed;
+  width:350px;
+  height:350px;
+  border-radius:50%;
+  filter:blur(100px);
+  background:rgba(255,120,0,0.18);
+  top:10%;
+  left:-100px;
+  z-index:-1;
+  animation:moveGlow 12s infinite alternate ease-in-out;
+}
+
+.glow2{
+  position:fixed;
+  width:300px;
+  height:300px;
+  border-radius:50%;
+  filter:blur(100px);
+  background:rgba(255,0,100,0.15);
+  bottom:10%;
+  right:-80px;
+  z-index:-1;
+  animation:moveGlow 10s infinite alternate ease-in-out;
+}
+
+@keyframes moveGlow{
+  from{transform:translateY(0);}
+  to{transform:translateY(80px);}
+}
+
+header{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  z-index:1000;
+  padding:14px 5%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+.logo{
+  font-size:28px;
+  font-weight:700;
+  color:#fff;
+}
+
+.logo span{
+  color:#ff9d00;
+}
+
+.nav-icons{
+  display:flex;
+  gap:12px;
+}
+
+.icon-btn{
+  width:46px;
+  height:46px;
+  border:none;
+  border-radius:50%;
+  background:rgba(255,255,255,0.08);
+  color:white;
+  backdrop-filter:blur(14px);
+  cursor:pointer;
+  font-size:18px;
+}
+
+.hero{
+  position:relative;
+  height:100vh;
+  overflow:hidden;
+}
+
+.slider{
+  position:absolute;
+  width:100%;
+  height:100%;
+}
+
+.slide{
+  position:absolute;
+  width:100%;
+  height:100%;
+  opacity:0;
+  transition:1s ease;
+  background-size:cover;
+  background-position:center;
+}
+
+.slide.active{
+  opacity:1;
+}
+
+.overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.45);
+}
+
+.hero-content{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+  padding:20px;
+}
+
+.hero-card{
+  width:80%;
+  max-width:400px;
+  padding:40px 30px;
+  text-align:center;
+  border-radius:30px;
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(18px);
+  border:1px solid rgba(255,255,255,0.08);
+  box-shadow:0 10px 40px rgba(0,0,0,0.35);
+}
+
+.hero-card h1{
+  font-size:56px;
+  margin-bottom:15px;
+  line-height:1.1;
+  color:white;
+}
+
+.hero-card p{
+  color:#ddd;
+  font-size:18px;
+  margin-bottom:28px;
+}
+
+.hero-buttons{
+  display:flex;
+  justify-content:center;
+  gap:16px;
+  flex-wrap:wrap;
+}
+
+.order-btn,
+.explore-btn{
+  text-decoration:none;
+  padding:14px 28px;
+  border-radius:18px;
+  font-size:16px;
+  font-weight:600;
+  transition:.3s;
+}
+
+.order-btn{
+  background:linear-gradient(45deg,#ff9d00,#ff6a00);
+  color:white;
+  box-shadow:0 8px 25px rgba(255,157,0,0.35);
+}
+
+.order-btn:hover{
+  transform:translateY(-5px);
+}
+
+.explore-btn{
+  background:rgba(255,255,255,0.08);
+  color:white;
+  border:1px solid rgba(255,255,255,0.08);
+}
+
+.explore-btn:hover{
+  transform:translateY(-5px);
+  background:rgba(255,255,255,0.14);
+}
+
+@media(max-width:768px){
+  .hero-card{
+    padding:30px 20px;
+  }
+
+  .hero-card h1{
+    font-size:36px;
+  }
+
+  .hero-card p{
+    font-size:15px;
+  }
+
+  .order-btn,
+  .explore-btn{
+    width:100%;
+    max-width:220px;
+    text-align:center;
+  }
+}
+
+.glass{
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(18px);
+  border:1px solid rgba(255,255,255,0.08);
+  box-shadow:0 10px 40px rgba(0,0,0,0.3);
+}
+
+.hero-card{
+  padding:35px;
+  border-radius:30px;
+}
+
+.hero h1{
+  font-size:58px;
+  line-height:1.1;
+}
+
+.hero p{
+  margin-top:16px;
+  color:#ddd;
+  line-height:1.7;
+}
+
+.search{
+  margin-top:22px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:16px 20px;
+  border-radius:20px;
+  background:rgba(255,255,255,0.08);
+}
+
+.search input{
+  background:none;
+  border:none;
+  outline:none;
+  color:white;
+  width:100%;
+  font-size:16px;
+}
+
+.search input::placeholder{
+  color:#ddd;
+}
+
+.slider-controls{
+  position:absolute;
+  bottom:120px;
+  right:5%;
+  display:flex;
+  gap:12px;
+  z-index:20;
+}
+
+.ctrl{
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  border:none;
+  background:rgba(255,255,255,0.1);
+  color:white;
+  backdrop-filter:blur(10px);
+  cursor:pointer;
+}
+
+.video-section{
+  padding:80px 5%;
+}
+
+.section-title{
+  font-size:36px;
+  margin-bottom:25px;
+}
+
+.video-box{
+  border-radius:30px;
+  overflow:hidden;
+  position:relative;
+}
+
+.video-box video{
+  width:100%;
+  display:block;
+  border-radius:30px;
+}
+
+.categories,
+.food-grid{
+  padding:20px 5% 90px;
+}
+
+.category-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:20px;
+}
+
+.category{
+  padding:24px;
+  border-radius:24px;
+  text-align:center;
+  transition:0.3s;
+}
+
+.category:hover{
+  transform:translateY(-8px);
+}
+
+.category i{
+  font-size:32px;
+  color:#ff9d00;
+  margin-bottom:14px;
+}
+
+.food-list{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:25px;
+}
+
+.food-card{
+  border-radius:28px;
+  overflow:hidden;
+  transition:0.35s;
+}
+
+.food-card:hover{
+  transform:translateY(-10px);
+}
+
+.food-card img{
+  width:100%;
+  height:240px;
+  object-fit:contain;
+  padding:20px;
+  background:rgba(255,255,255,0.04);
+}
+
+.food-content{
+  padding:20px;
+}
+
+.food-content h3{
+  font-size:24px;
+}
+
+.food-content p{
+  color:#ccc;
+  margin-top:10px;
+}
+
+.row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:18px;
+}
+
+.price{
+  font-size:24px;
+  font-weight:700;
+  color:#ffb300;
+}
+
+.add{
+  padding:12px 20px;
+  border:none;
+  border-radius:30px;
+  background:linear-gradient(45deg,#ff8a00,#ff3d00);
+  color:white;
+  cursor:pointer;
+}
+
+.bottom-nav{
+  position:fixed;
+  bottom:16px;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(95%,520px);
+  display:flex;
+  justify-content:space-around;
+  padding:16px;
+  border-radius:30px;
+  z-index:1000;
+}
+
+.bottom-nav a{
+  color:white;
+  font-size:22px;
+  text-decoration:none;
+  transition:0.3s;
+}
+
+.bottom-nav a:hover{
+  color:#ff9d00;
+  transform:translateY(-4px);
+}
+
+@media(max-width:768px){
+  .hero h1{
+    font-size:36px;
+  }
+
+  .hero-card{
+    padding:22px;
+  }
+
+ .section-title{
+    font-size:28px;
+    text-align:center;
+}
+
+  .offer h2{
+    font-size:28px;
+  }
+
+  .slider-controls{
+    bottom:100px;
+  }
+}
+
+@media(max-width:480px){
+  .logo{
+    font-size:22px;
+  }
+
+  .hero h1{
+    font-size:28px;
+  }
+
+  .hero p{
+    font-size:14px;
+  }
+
+  .food-card img{
+    height:200px;
+  }
+}
+/* WHY CHOOSE */
+
+.why{
+  padding:0 5% 90px;
+}
+
+.why-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:24px;
+}
+
+.why-card{
+  padding:28px;
+  border-radius:24px;
+  text-align:center;
+}
+
+.why-card i{
+  font-size:40px;
+  color:var(--primary);
+  margin-bottom:16px;
+}
+
+/* TABLE */
+
+.table-section{
+  padding:0 5% 90px;
+}
+
+.reserve-box{
+  padding:35px;
+  border-radius:30px;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+}
+
+.input-box{
+  display:flex;
+  flex-direction:column;
+}
+
+.input-box label{
+  margin-bottom:10px;
+}
+
+.input-box input,
+.input-box select{
+  padding:14px;
+  border:none;
+  border-radius:14px;
+  background:rgba(255,255,255,0.08);
+  color:white;
+  outline:none;
+}
+
+.reserve-btn{
+  margin-top:25px;
+  width:100%;
+  padding:16px;
+  border:none;
+  border-radius:16px;
+  background:linear-gradient(45deg,#ff9800,#ff3d00);
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+}
+
+/* REVIEWS */
+
+.reviews{
+  padding:0 5% 100px;
+}
+
+.review-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:24px;
+}
+
+.review-card{
+  padding:28px;
+  border-radius:26px;
+}
+
+.stars{
+  color:#ffb300;
+  margin-bottom:15px;
+}
+
+/* BOTTOM NAV */
+
+.bottom-nav{
+  position:fixed;
+  bottom:15px;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(94%,520px);
+  display:flex;
+  justify-content:space-around;
+  padding:16px;
+  border-radius:30px;
+  z-index:999;
+}
+
+.bottom-nav a{
+  color:white;
+  font-size:22px;
+  text-decoration:none;
+  transition:0.3s;
+}
+
+.bottom-nav a:hover{
+  color:var(--primary);
+  transform:translateY(-5px);
+}
+
+@media(max-width:768px){
+
+.hero h1{
+  font-size:40px;
+}
+
+.section-title{
+  font-size:30px;
+}
+
+.hero-card{
+  padding:24px;
+}
+
+}
+
+@media(max-width:480px){
+
+.logo{
+  font-size:22px;
+}
+
+.hero h1{
+  font-size:30px;
+}
+
+.hero p{
+  font-size:14px;
+}
+
+}
+/* RESERVE POPUP */
+
+.reserve-popup{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.7);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:3000;
+  opacity:0;
+  visibility:hidden;
+  transition:0.3s;
+}
+
+.reserve-popup.active{
+  opacity:1;
+  visibility:visible;
+}
+
+.reserve-popup-box{
+  width:min(92%,420px);
+  padding:32px;
+  border-radius:30px;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+.reserve-popup-box h2{
+  text-align:center;
+  margin-bottom:10px;
+}
+
+.reserve-popup-box input,
+.reserve-popup-box select{
+  padding:16px;
+  border:none;
+  border-radius:16px;
+  background:rgba(255,255,255,0.08);
+  color:white;
+  outline:none;
+}
+
+.reserve-popup-box button{
+  padding:16px;
+  border:none;
+  border-radius:16px;
+  background:linear-gradient(45deg,#ff9800,#ff3d00);
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+}
+
+.close-popup{
+  position:absolute;
+  top:18px;
+  right:22px;
+  font-size:30px;
+  cursor:pointer;
+}
+/* VISIONCRAFT SECTION */
+
+.visioncraft-section{
+  padding:20px 5% 90px;
+}
+
+.visioncraft-box{
+  max-width:900px;
+  margin:auto;
+  padding:40px;
+  border-radius:30px;
+  text-align:center;
+}
+
+.visioncraft-box h2{
+  font-size:36px;
+  margin-bottom:18px;
+  color:#ffb300;
+  font-family:'Playfair Display',serif;
+}
+
+.visioncraft-box p{
+  color:#ccc;
+  line-height:1.9;
+  font-size:16px;
+}
+
+@media(max-width:768px){
+
+.visioncraft-box{
+  padding:28px;
+}
+
+.visioncraft-box h2{
+  font-size:28px;
+}
+
+}
+
+/* REVIEWS SECTION */
+
+.reviews-section{
+  padding:90px 5%;
+}
+
+.reviews-title{
+  text-align:center;
+  font-size:40px;
+  margin-bottom:10px;
+  font-family:'Playfair Display',serif;
+  color:white;
+}
+
+.reviews-subtitle{
+  text-align:center;
+  color:#ccc;
+  margin-bottom:40px;
+}
+
+/* FORM */
+
+.review-form-box{
+  max-width:720px;
+  margin:auto;
+  padding:30px;
+  border-radius:30px;
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(18px);
+  border:1px solid rgba(255,255,255,0.08);
+  box-shadow:0 10px 40px rgba(0,0,0,0.3);
+}
+
+.review-form-box input,
+.review-form-box textarea{
+  width:100%;
+  padding:16px 18px;
+  margin-bottom:20px;
+  border:none;
+  outline:none;
+  border-radius:18px;
+  background:rgba(255,255,255,0.08);
+  color:white;
+  font-size:15px;
+}
+
+.review-form-box input::placeholder,
+.review-form-box textarea::placeholder{
+  color:#ccc;
+}
+
+.review-form-box textarea{
+  resize:none;
+}
+
+/* STARS */
+
+.rating-box{
+  text-align:center;
+  margin-bottom:24px;
+}
+
+.star{
+  font-size:40px;
+  color:#555;
+  cursor:pointer;
+  transition:0.3s;
+  margin:0 4px;
+}
+
+.star:hover{
+  transform:scale(1.2);
+}
+
+.star.active{
+  color:#ffb300;
+  transform:scale(1.2);
+}
+
+/* BUTTON */
+
+.review-form-box button{
+  width:100%;
+  padding:16px;
+  border:none;
+  border-radius:18px;
+  background:linear-gradient(45deg,#ff9800,#ff3d00);
+  color:white;
+  font-size:17px;
+  font-weight:600;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.review-form-box button:hover{
+  transform:translateY(-3px);
+}
+
+/* REVIEWS LIST */
+
+.reviews-list{
+  margin-top:55px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:25px;
+}
+
+/* REVIEW CARD */
+
+.review-card{
+  padding:25px;
+  border-radius:28px;
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(18px);
+  border:1px solid rgba(255,255,255,0.08);
+  transition:0.35s;
+  box-shadow:0 10px 30px rgba(0,0,0,0.25);
+}
+
+.review-card:hover{
+  transform:translateY(-8px);
+}
+
+.review-card h3{
+  color:#ffb300;
+  margin-bottom:12px;
+  font-size:22px;
+}
+
+.review-stars{
+  color:#ffb300;
+  margin-bottom:15px;
+  font-size:22px;
+}
+
+.review-card p{
+  color:#ddd;
+  line-height:1.7;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.reviews-title{
+  font-size:30px;
+}
+
+.review-form-box{
+  padding:24px;
+}
+
+.star{
+  font-size:34px;
+}
+
+}
+.side-menu{
+  position:fixed;
+  top:0;
+  right:-320px;
+  width:280px;
+  height:100vh;
+  background:rgba(15,15,25,0.95);
+  backdrop-filter:blur(20px);
+  z-index:2000;
+  padding:100px 30px;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+  transition:0.4s ease;
+  border-left:1px solid rgba(255,255,255,0.08);
+}
+
+.side-menu.active{
+  right:0;
+}
+
+.side-menu a{
+  color:white;
+  text-decoration:none;
+  font-size:18px;
+  padding:14px 18px;
+  border-radius:14px;
+  background:rgba(255,255,255,0.08);
+  transition:0.3s;
+}
+
+.side-menu a:hover{
+  background:linear-gradient(45deg,#ff9800,#ff3d00);
+  transform:translateX(-5px);
+}
+
+.menu-toggle{
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(255,255,255,0.08);
+  color:white;
+  cursor:pointer;
+  font-size:20px;
+}
+
+
+</style>
+</head>
+<body>
+
+<div class="glow"></div>
+<div class="glow2"></div>
+  <header>
+  <div id="logo" class="logo">
+    Hotel <span> Sree Divya Grand </span>
+  </div>
+  
+  <!-- RIGHT SIDE -->
+  
+  <div style="display:flex;align-items:center;gap:12p
+  x;">
+  <!-- TOGGLE BUTTON -->
+    <div class="menu-toggle" onclick="toggleMenu()">
+      <i class="fa-solid fa-bars"></i>
+<div class="side-menu" id="sideMenu">
+  <a href="index.html" onclick="closeMenu()">Home</a>
+  <a href="menu.html" onclick="closeMenu()">Menu</a>
+  <a href="about.html" onclick="closeMenu()">About</a>
+  <a href="contact.html" onclick="closeMenu()">Contact</a>
+  <a href="gallery.html" onclick="closeMenu()">Gallery</a>
+</div>
+    </div>      
+  </div>      
+</header>  
+</div>
+<div>  
+<section class="hero">
+  <div class="slider">
+    <div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=1600');"></div>
+    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=1600');"></div>
+    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=1600');"></div>
+    <div class="overlay"></div>
+  </div>
+
+  <div class="hero-content">
+  <div class="hero-card glass">
+    <h1>Hotel Sree Divya Grand</h1>
+    <p>Authentic Taste • Premium Dining • Fast Service</p>
+
+    <div class="hero-buttons">
+      <a href="menu.html" class="order-btn">Order Now</a>
+      <a href="about.html" class="explore-btn">Explore</a>
+    </div>
+  </div>
+</div>
+    
+    </div>
+  </div>
+    <div class="slider-controls">
+    <button class="ctrl" onclick="prevSlide()"><i class="fa-solid fa-chevron-left"></i></button>
+    <button class="ctrl" onclick="nextSlide()"><i class="fa-solid fa-chevron-right"></i></button>
+  </div>
+</section>
+
+<section class="video-section">
+  <h2 class="section-title">Restaurant Experience</h2>
+  <div class="video-box glass">
+    <video autoplay muted loop playsinline>
+      <source src="hero.mp4" type="video/mp4">
+    </video>
+  </div>
+</section>
+
+<section class="categories">
+  <h2 class="section-title">Categories</h2>
+
+  <div class="category-grid">
+    <div class="category glass"><i class="fa-solid fa-bowl-rice"></i><h3>Tiffins</h3></div>
+
+    <div class="category glass"><i class="fa-solid fa-glass-water"></i><h3>Juice</h3></div>
+
+    <div class="category glass"><i class="fa-solid fa-mug-hot"></i><h3>Tea</h3></div>
+
+    <div class="category glass"><i class="fa-solid fa-drumstick-bite"></i><h3>Biryani</h3></div>
+  </div>
+</section>
+<section class="food-grid">
+  <h2 class="section-title">Popular Dishes</h2>
+
+  <div class="food-list">
+
+  <div class="food-card glass">
+    <img src="biryani.png" alt="Hyderabadi Biryani">
+
+    <div class="food-content">
+      <h3>Hyderabadi Biryani</h3>
+      <p>Authentic dum biryani with rich Indian spices.</p>
+
+      <div class="row">
+        <span class="price">₹270</span>
+
+        <button
+          class="add"
+          onclick="addToCart('Hyderabadi Biryani',270)">
+          Add
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="food-card glass">
+    <img src="prawns.png" alt="Golden Fry Prawns">
+
+    <div class="food-content">
+      <h3>Golden Fry Prawns</h3>
+      <p>Char-grilled Indian classic with smoky flavors.</p>
+
+      <div class="row">
+        <span class="price">₹350</span>
+
+        <button
+          class="add"
+          onclick="addToCart('Golden Fry Prawns',350)">
+          Add
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="food-card glass">
+    <img src="Dosa.png" alt="Dosa">
+
+    <div class="food-content">
+      <h3>Dosa</h3>
+      <p>Crispy South Indian favorite with potato masala.</p>
+
+      <div class="row">
+        <span class="price">₹70</span>
+
+        <button
+          class="add"
+          onclick="addToCart('Dosa',70)">
+          Add
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>
+</section>
+
+
+<!-- WHY CHOOSE -->
+
+<section class="why" id="why">
+
+<h2 class="section-title">Why Choose Us</h2>
+
+<div class="why-grid">
+
+<div class="why-card glass">
+<i class="fa-solid fa-award"></i>
+<h3>Premium Taste</h3>
+<p>Authentic recipes with rich quality ingredients.</p>
+</div>
+
+<div class="why-card glass">
+<i class="fa-solid fa-user-group"></i>
+<h3>Family Friendly</h3>
+<p>Comfortable seating for families & friends.</p>
+</div>
+
+<div class="why-card glass">
+<i class="fa-solid fa-bolt"></i>
+<h3>Fast Service</h3>
+<p>Quick preparation and instant delivery support.</p>
+</div>
+
+</div>
+
+</section>
+<!-- TABLE -->
+
+<section class="table-section" id="table">
+
+  <h2 class="section-title">Reserve Table</h2>
+
+  <div class="reserve-box glass">
+
+    <p style="
+      text-align:center;
+      color:#ccc;
+      margin-bottom:25px;
+      line-height:1.7;
+    ">
+      Reserve your table instantly through WhatsApp booking.
+    </p>
+
+    <button class="reserve-btn" onclick="openReservePopup()">
+      Reserve Table
+    </button>
+
+  </div>
+
+</section>
+
+<!-- RESERVE POPUP -->
+
+<div class="reserve-popup" id="reservePopup">
+
+  <div class="reserve-popup-box glass">
+
+    <span class="close-popup" onclick="closeReservePopup()">
+      &times;
+    </span>
+
+    <h2>Book Your Table</h2>
+
+    <input type="text" id="reserveName" placeholder="Your Name">
+
+    <input type="number" id="reservePhone" placeholder="Phone Number">
+
+    <select id="reserveType">
+      <option>AC</option>
+      <option>Non AC</option>
+    </select>
+
+    <select id="reserveFamily">
+      <option>Family</option>
+      <option>Normal</option>
+    </select>
+
+    <input type="number" id="reservePersons" placeholder="No Of Persons">
+
+    <button onclick="sendWhatsAppReservation()">
+      Confirm Reservation
+    </button>
+
+  </div>
+
+</div>
+<!-- CUSTOMER REVIEWS SECTION -->
+
+<section class="reviews-section" id="reviews">
+
+  <div class="reviews-container">
+
+    <h2 class="reviews-title">
+      Customer Reviews
+    </h2>
+
+    <p class="reviews-subtitle">
+      What Our Customers Say
+    </p>
+
+    <!-- REVIEW FORM -->
+
+    <div class="review-form-box glass">
+
+      <form id="reviewForm">
+
+        <input 
+        type="text" 
+        id="customerName"
+        placeholder="Enter Your Name"
+        required>
+
+        <textarea
+        id="customerReview"
+        rows="5"
+        placeholder="Write Your Review..."
+        required></textarea>
+
+        <!-- STAR RATING -->
+
+        <div class="rating-box">
+
+          <span class="star" data-value="1">★</span>
+
+          <span class="star" data-value="2">★</span>
+
+          <span class="star" data-value="3">★</span>
+
+          <span class="star" data-value="4">★</span>
+
+          <span class="star" data-value="5">★</span>
+
+        </div>
+
+        <button type="submit">
+          Submit Review
+        </button>
+
+      </form>
+
+    </div>
+
+    <!-- REVIEWS DISPLAY -->
+
+    <div id="reviewsList" class="reviews-list">
+
+
+
+    </div>
+
+  </div>
+
+</section>
+<!-- BOTTOM NAV -->
+
+<nav class="bottom-nav glass">
+
+<a href="index.html"><i class="fa-solid fa-house"></i></a>
+
+<a href="about.html"><i class="fa-solid fa-user"></i></a>
+
+  <a href="menu.html"><i class="fa-solid fa-utensils"></i></a>
+  
+  <a href="gallery.html"><i class="fa-solid fa-images"></i></a>
+
+<a href="Contact.html"><i class="fa-solid fa-phone"></i></a>
+
+</nav>
+<script>
+let tapCount = 0;
+let tapTimer;
+
+document.getElementById("logo").addEventListener("click", function () {
+
+    tapCount++;
+
+    clearTimeout(tapTimer);
+
+    tapTimer = setTimeout(() => {
+        tapCount = 0;
+    }, 2000);
+
+    if (tapCount === 5) {
+        window.location.href = "admin.html";
+    }
+
+});
+</script>
+<script type="module">
+
+/* FIREBASE IMPORTS */
+
+import { initializeApp } from
+"https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+
+import {
+  getDatabase,
+  ref,
+  push,
+  onValue
+} from
+"https://www.gstatic.com/firebasejs/12.14.0/firebase-database.js";
+
+/* FIREBASE CONFIG */
+
+const firebaseConfig = {
+
+  apiKey:
+  "AIzaSyCMGNc8WlryR0_GCt24v88FdmPp6EI_xAE",
+
+  authDomain:
+  "resturant-5fae9.firebaseapp.com",
+
+  databaseURL:
+  "https://resturant-5fae9-default-rtdb.firebaseio.com",
+
+  projectId:
+  "resturant-5fae9",
+
+  storageBucket:
+  "resturant-5fae9.firebasestorage.app",
+
+  messagingSenderId:
+  "171303937190",
+
+  appId:
+  "1:171303937190:web:8693d7306e410724fb0067"
+
+};
+
+/* INITIALIZE FIREBASE */
+
+const app =
+initializeApp(firebaseConfig);
+
+const db =
+getDatabase(app);
+
+/* =========================
+   SLIDER
+========================= */
+
+let currentSlide = 0;
+
+const slides =
+document.querySelectorAll(".slide");
+
+function showSlide(index){
+
+  slides.forEach(slide=>{
+
+    slide.classList.remove(
+      "active"
+    );
+
+  });
+
+  slides[index]
+  .classList.add("active");
+
+}
+
+function nextSlide(){
+
+  currentSlide =
+  (currentSlide + 1)
+  % slides.length;
+
+  showSlide(currentSlide);
+
+}
+
+function prevSlide(){
+
+  currentSlide =
+  (
+    currentSlide - 1
+    + slides.length
+  )
+  % slides.length;
+
+  showSlide(currentSlide);
+
+}
+
+setInterval(nextSlide,4000);
+
+/* GLOBAL BUTTON ACCESS */
+
+window.nextSlide = nextSlide;
+window.prevSlide = prevSlide;
+
+/* =========================
+   SIDEBAR MENU
+========================= */
+
+window.toggleMenu = function(){
+
+  document
+  .getElementById("sideMenu")
+  .classList.toggle("active");
+
+}
+
+window.closeMenu = function(){
+
+  document
+  .getElementById("sideMenu")
+  .classList.remove("active");
+
+}
+
+/* =========================
+   RESERVATION POPUP
+========================= */
+
+window.openReservePopup =
+function(){
+
+  document
+  .getElementById("reservePopup")
+  .classList.add("active");
+
+}
+
+window.closeReservePopup =
+function(){
+
+  document
+  .getElementById("reservePopup")
+  .classList.remove("active");
+
+}
+
+/* =========================
+   WHATSAPP RESERVATION
+========================= */
+
+window.sendWhatsAppReservation =
+function(){
+
+  const name =
+  document.getElementById(
+    "reserveName"
+  ).value.trim();
+
+  const phone =
+  document.getElementById(
+    "reservePhone"
+  ).value.trim();
+
+  const type =
+  document.getElementById(
+    "reserveType"
+  ).value;
+
+  const family =
+  document.getElementById(
+    "reserveFamily"
+  ).value;
+
+  const persons =
+  document.getElementById(
+    "reservePersons"
+  ).value.trim();
+
+  if(
+    !name ||
+    !phone ||
+    !persons
+  ){
+
+    alert(
+    "Please fill all details"
+    );
+
+    return;
+
+  }
+
+  const msg =
+
+`Welcome to Hotel Sree Divya Grand ✯
+
+Thank you for reserving a table at our hotel.
+
+❥ Table Reservation Details
+
+★ Name: ${name}
+
+★ Phone: ${phone}
+
+★ Type: ${type}
+
+★ Section: ${family}
+
+★ Persons: ${persons}
+
+We look forward to serving you ♡`;
+
+  window.open(
+
+`https://wa.me/917901503548?text=${
+encodeURIComponent(msg)
+}`,
+
+"_blank"
+
+  );
+
+}
+
+/* =========================
+   FIREBASE REVIEW SYSTEM
+========================= */
+
+let selectedRating = 0;
+
+const stars =
+document.querySelectorAll(".star");
+
+const reviewForm =
+document.getElementById(
+"reviewForm"
+);
+
+const reviewsList =
+document.getElementById(
+"reviewsList"
+);
+
+/* STAR CLICK */
+
+stars.forEach((star,index)=>{
+
+  star.addEventListener(
+  "click",
+  ()=>{
+
+    selectedRating =
+    index + 1;
+
+    stars.forEach(s=>{
+
+      s.classList.remove(
+      "active"
+      );
+
+    });
+
+    for(
+      let i=0;
+      i<selectedRating;
+      i++
+    ){
+
+      stars[i]
+      .classList.add(
+      "active"
+      );
+
+    }
+
+  });
+
+});
+
+/* REVIEW SUBMIT */
+
+reviewForm.addEventListener(
+"submit",
+(e)=>{
+
+  e.preventDefault();
+
+  const name =
+  document.getElementById(
+    "customerName"
+  ).value.trim();
+
+  const review =
+  document.getElementById(
+    "customerReview"
+  ).value.trim();
+
+  if(!name || !review){
+
+    alert(
+    "Please fill all fields"
+    );
+
+    return;
+
+  }
+
+  if(selectedRating === 0){
+
+    alert(
+    "Please select rating"
+    );
+
+    return;
+
+  }
+
+  const reviewData = {
+
+    name:name,
+
+    review:review,
+
+    rating:selectedRating,
+
+    createdAt:Date.now()
+
+  };
+
+  /* SAVE REVIEW */
+
+  push(
+    ref(db,"reviews"),
+    reviewData
+  );
+
+  /* RESET */
+
+  reviewForm.reset();
+
+  selectedRating = 0;
+
+  stars.forEach(s=>{
+
+    s.classList.remove(
+      "active"
+    );
+
+  });
+
+});
+
+/* FETCH REVIEWS */
+
+onValue(
+ref(db,"reviews"),
+(snapshot)=>{
+
+  const data =
+  snapshot.val();
+
+  reviewsList.innerHTML = "";
+
+  if(!data){
+
+    reviewsList.innerHTML =
+    "<p>No reviews yet</p>";
+
+    return;
+
+  }
+
+  const reviews =
+  Object.values(data)
+  .sort(
+    (a,b)=>
+    b.createdAt -
+    a.createdAt
+  );
+
+  reviews.forEach(item=>{
+
+    const reviewCard =
+    document.createElement("div");
+
+    reviewCard.classList.add(
+      "review-card",
+      "glass"
+    );
+
+    let starsHTML = "";
+
+    for(
+      let i=0;
+      i<item.rating;
+      i++
+    ){
+
+      starsHTML += "★";
+
+    }
+
+    reviewCard.innerHTML = `
+
+      <h3>
+
+        ${item.name}
+
+      </h3>
+
+      <div class="review-stars">
+
+        ${starsHTML}
+
+      </div>
+
+      <p>
+
+        ${item.review}
+
+      </p>
+
+    `;
+
+    reviewsList.prepend(
+      reviewCard
+    );
+
+  });
+
+});
+
+</script>
+<script>
+function addToCart(name, price){
+
+  let cart =
+  JSON.parse(localStorage.getItem("cart")) || [];
+
+  cart.push({
+    name: name,
+    price: price,
+    qty: 1
+  });
+
+  localStorage.setItem(
+    "cart",
+    JSON.stringify(cart)
+  );
+
+  alert(name + " Added To Cart");
+}
+</script>
+</body>
+</html>

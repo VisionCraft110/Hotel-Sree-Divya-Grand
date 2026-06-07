@@ -1,0 +1,479 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Restaurant Admin Panel</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,sans-serif}
+body{background:#0b0b12;color:#fff;min-height:100vh;padding:20px}
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:linear-gradient(135deg,rgba(255,120,0,0.08),rgba(255,255,255,0.02));
+  z-index:-2;
+}
+.glass{background:rgba(255,255,255,.08);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.12);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.container{max-width:1200px;margin:auto}
+.header{display:flex;justify-content:space-between;align-items:center;padding:20px 25px;border-radius:24px;margin-bottom:20px}
+.header h1{font-size:30px}.accent{color:#00e5ff}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px;margin-bottom:20px}.stat{padding:20px;border-radius:20px}.stat h3{color:#bbb;font-size:14px}.stat p{font-size:28px;font-weight:700;margin-top:8px}
+.grid{display:grid;grid-template-columns:380px 1fr;gap:20px}
+.panel{padding:25px;border-radius:24px}
+.input{width:100%;padding:14px 16px;margin-bottom:14px;border:none;border-radius:14px;background:rgba(255,255,255,.08);color:#fff;outline:none}.input::placeholder{color:#ccc}
+textarea.input{min-height:100px;resize:vertical}
+.btn{padding:14px 18px;border:none;border-radius:14px;cursor:pointer;font-weight:700}
+.primary{background:linear-gradient(45deg,#00e5ff,#008cff);color:#fff;width:100%}
+.warning{background:linear-gradient(45deg,#ff9500,#ff4d00);color:#fff}
+.danger{background:linear-gradient(45deg,#ff3b30,#d70015);color:#fff}
+.search-row{display:flex;gap:10px;margin-bottom:15px}.search-row .input{margin-bottom:0}
+table{width:100%;border-collapse:collapse;overflow:hidden;border-radius:18px}th,td{padding:14px;text-align:left}th{background:rgba(255,255,255,.1)}tr:nth-child(even){background:rgba(255,255,255,.03)}
+.action-btn{padding:8px 12px;border:none;border-radius:10px;margin-right:6px;cursor:pointer;color:#fff}
+.empty{text-align:center;color:#bbb;padding:25px}
+@media(max-width:900px){.grid{grid-template-columns:1fr} .header h1{font-size:24px}}
+@media(max-width:600px){body{padding:10px}.panel,.header{padding:16px}.search-row{flex-direction:column}table{font-size:13px}th,td{padding:10px}}
+.login-box{
+  width:100%;
+  max-width:420px;
+  margin:80px auto;
+  padding:30px;
+  border-radius:24px;
+  text-align:center;
+}
+.login-box h2{
+  margin-bottom:20px;
+}
+.admin-profile{
+  text-align:center;
+  margin-bottom:25px;
+}
+
+.admin-profile img{
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  object-fit:cover;
+  border:4px solid rgba(255,255,255,0.2);
+  box-shadow:0 0 25px rgba(255,140,0,0.45);
+  margin-bottom:15px;
+}
+
+.admin-profile h3{
+  color:white;
+  font-size:24px;
+  margin-bottom:6px;
+}
+
+.admin-profile p{
+  color:#ddd;
+  font-size:14px;
+}
+.admin-brand{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+.admin-brand img{
+  width:60px;
+  height:60px;
+  border-radius:16px;
+  object-fit:cover;
+  background:rgba(255,255,255,0.08);
+  padding:8px;
+  box-shadow:0 0 20px rgba(255,140,0,0.35);
+}
+
+.admin-brand h2{
+  color:white;
+  font-size:26px;
+  margin:0;
+}
+
+.admin-brand p{
+  color:#ccc;
+  font-size:13px;
+  margin-top:4px;
+}
+</style>
+</head>
+<body>
+<div id="loginScreen" class="glass login-box">
+<div class="admin-profile">
+  <img src="owner.jpg" alt="Admin">
+  <h3>Mr. A T Yadav</h3>
+  <p>Restaurant Owner / Administrator</p>
+</div>
+  <h2>Admin Login</h2>
+  <input id="username" class="input" placeholder="Username">
+  <input id="password" class="input" type="password" placeholder="Password">
+  <button class="btn primary" onclick="login()">Login</button>
+</div>
+
+<div id="adminPanel" style="display:none;">
+<div class="container">
+<div class="header glass">
+<div class="admin-brand">
+  <img src="owner.jpg" alt="Logo">
+ 
+</div>
+<h1>Admin</h1>
+<button class="btn warning"><i class="fa-solid fa-shield"></i> Admin Panel</button>
+</div>
+<div class="stats">
+<div class="stat glass"><h3>Total Items</h3><p id="totalItems">0</p></div>
+<div class="stat glass"><h3>Total Categories</h3><p id="totalCategories">0</p></div>
+<div class="stat glass"><h3>Search Ready</h3><p>Live</p></div>
+</div>
+<div class="grid">
+<div class="panel glass">
+<h2 style="margin-bottom:18px">Add / Edit Item</h2>
+<input id="itemName" class="input" placeholder="Item Name">
+<input id="itemPrice" class="input" type="number" placeholder="Price">
+<input id="itemCategory" class="input" placeholder="Enter Category (Biryani, Starters...)">
+<button id="saveBtn" class="btn primary" onclick="saveItem()"><i class="fa-solid fa-plus"></i> Add Item</button>
+</div>
+<div class="panel glass">
+<div class="search-row">
+<input id="search"
+class="input"
+placeholder="Search items/category...">
+</div>
+<div style="overflow:auto">
+<table>
+<thead>
+<tr><th>Item</th><th>Category</th><th>Price</th><th>Actions</th></tr>
+</thead>
+<tbody id="itemsTable">
+<tr><td colspan="4" class="empty">No items added yet</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+
+import {
+  getDatabase,
+  ref,
+  push,
+  set,
+  onValue,
+  remove,
+  update
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-database.js";
+
+/* FIREBASE CONFIG */
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCMGNc8WlryR0_GCt24v88FdmPp6EI_xAE",
+  authDomain: "resturant-5fae9.firebaseapp.com",
+  databaseURL: "https://resturant-5fae9-default-rtdb.firebaseio.com/",
+  projectId: "resturant-5fae9",
+  storageBucket: "resturant-5fae9.firebasestorage.app",
+  messagingSenderId: "171303937190",
+  appId: "1:171303937190:web:8693d7306e410724fb0067",
+  measurementId: "G-QHN8E6VK2N"
+};
+
+/* INITIALIZE */
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+/* LOGIN */
+
+window.login = function(){
+
+  const user = document.getElementById('username').value;
+  const pass = document.getElementById('password').value;
+
+  if(user === "admin" && pass === "1234"){
+
+    document.getElementById('loginScreen').style.display = 'none';
+
+    document.getElementById('adminPanel').style.display = 'block';
+
+  } else {
+
+    alert("Wrong username or password");
+
+  }
+
+}
+
+/* GLOBAL VARIABLES */
+
+let items = [];
+let editId = null;
+
+/* SAVE ITEM */
+
+window.saveItem = function(){
+
+  const name = document.getElementById('itemName').value.trim();
+
+  const price = document.getElementById('itemPrice').value.trim();
+
+  const category = document.getElementById('itemCategory').value.trim();
+
+  if(!name || !price || !category){
+
+    alert('Fill all fields');
+
+    return;
+
+  }
+
+  const itemData = {
+    name,
+    price,
+    category
+  };
+
+  /* UPDATE */
+
+  if(editId){
+
+    update(ref(db, 'restaurantItems/' + editId), itemData);
+
+    editId = null;
+
+    document.getElementById('saveBtn').innerHTML =
+    '<i class="fa-solid fa-plus"></i> Add Item';
+
+  }
+
+  /* ADD */
+
+  else{
+
+    const newRef = push(ref(db, 'restaurantItems'));
+
+    set(newRef, itemData);
+
+  }
+
+  clearForm();
+
+}
+
+/* REALTIME RENDER */
+
+function renderItems(){
+
+  const itemsRef = ref(db, 'restaurantItems');
+
+  onValue(itemsRef, (snapshot)=>{
+
+    const data = snapshot.val();
+
+    items = [];
+
+    const tbody = document.getElementById('itemsTable');
+
+    const q = document.getElementById('search')
+    .value
+    .toLowerCase();
+
+    if(!data){
+
+      tbody.innerHTML =
+      '<tr><td colspan="4" class="empty">No Items Found</td></tr>';
+
+      updateStats();
+
+      return;
+
+    }
+
+    Object.entries(data).forEach(([id,item])=>{
+
+      items.push({
+        id,
+        ...item
+      });
+
+    });
+
+    const filtered = items.filter(item =>
+
+      item.name.toLowerCase().includes(q) ||
+
+      item.category.toLowerCase().includes(q)
+
+    );
+
+    if(!filtered.length){
+
+      tbody.innerHTML =
+      '<tr><td colspan="4" class="empty">No Matching Items</td></tr>';
+
+      return;
+
+    }
+
+    tbody.innerHTML = filtered.map(item => `
+
+      <tr>
+
+        <td>${item.name}</td>
+
+        <td>${item.category}</td>
+
+        <td>₹${item.price}</td>
+
+        <td>
+
+          <button
+          class="action-btn warning"
+          onclick="editItem('${item.id}')">
+
+          Edit
+
+          </button>
+
+          <button
+          class="action-btn danger"
+          onclick="deleteItem('${item.id}')">
+
+          Delete
+
+          </button>
+
+        </td>
+
+      </tr>
+
+    `).join('');
+
+    updateStats();
+
+  });
+
+}
+
+/* EDIT */
+
+window.editItem = function(id){
+
+  const item = items.find(i => i.id === id);
+
+  if(!item) return;
+
+  document.getElementById('itemName').value = item.name;
+
+  document.getElementById('itemPrice').value = item.price;
+
+  document.getElementById('itemCategory').value = item.category;
+
+  editId = id;
+
+  document.getElementById('saveBtn').innerHTML =
+  '<i class="fa-solid fa-pen"></i> Update Item';
+
+  window.scrollTo({
+    top:0,
+    behavior:'smooth'
+  });
+
+}
+
+/* DELETE */
+
+window.deleteItem = function(id){
+
+  if(confirm('Delete this item?')){
+
+    remove(ref(db, 'restaurantItems/' + id));
+
+  }
+
+}
+
+/* CLEAR FORM */
+
+function clearForm(){
+
+  document.getElementById('itemName').value = '';
+
+  document.getElementById('itemPrice').value = '';
+
+  document.getElementById('itemCategory').value = '';
+
+}
+
+/* STATS */
+
+function updateStats(){
+
+  document.getElementById('totalItems').textContent =
+  items.length;
+
+  document.getElementById('totalCategories').textContent =
+  new Set(items.map(i => i.category.toLowerCase())).size;
+
+}
+
+/* START */
+
+renderItems();
+document.getElementById("search")
+.addEventListener("input", function(){
+
+  const q = this.value.toLowerCase();
+
+  const tbody =
+  document.getElementById("itemsTable");
+
+  const filtered = items.filter(item =>
+
+    item.name.toLowerCase().includes(q) ||
+
+    item.category.toLowerCase().includes(q)
+
+  );
+
+  if(filtered.length === 0){
+
+    tbody.innerHTML =
+    '<tr><td colspan="4" class="empty">No Matching Items</td></tr>';
+
+    return;
+
+  }
+
+  tbody.innerHTML = filtered.map(item => `
+
+    <tr>
+      <td>${item.name}</td>
+      <td>${item.category}</td>
+      <td>₹${item.price}</td>
+
+      <td>
+        <button
+        class="action-btn warning"
+        onclick="editItem('${item.id}')">
+        Edit
+        </button>
+
+        <button
+        class="action-btn danger"
+        onclick="deleteItem('${item.id}')">
+        Delete
+        </button>
+      </td>
+
+    </tr>
+
+  `).join('');
+
+});
+</script>
+</body>
+</html>

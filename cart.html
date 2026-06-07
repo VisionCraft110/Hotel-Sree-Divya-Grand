@@ -1,0 +1,1588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Cart | Hotel Sree Divya Grand</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+}
+
+body{
+  background:linear-gradient(135deg,#0b0b12,#1a1020);
+  color:white;
+  min-height:100vh;
+  overflow-x:hidden;
+  padding-bottom:120px;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+  radial-gradient(circle at top right,
+  rgba(255,140,0,0.18),
+  transparent 40%);
+  z-index:-1;
+}
+
+/* GLASS */
+
+.glass{
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(18px);
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 10px 40px rgba(0,0,0,.35);
+}
+
+/* HEADER */
+
+header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  padding:12px 5%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+.logo h2{
+  font-size:22px;
+}
+
+.logo span{
+  color:#ff9d00;
+}
+
+/* TOGGLE */
+
+.menu-toggle{
+  width:50px;
+  height:50px;
+  border-radius:16px;
+  border:none;
+  color:white;
+  font-size:20px;
+  cursor:pointer;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+  position:fixed;
+  top:0;
+  right:-300px;
+  width:280px;
+  height:100%;
+  padding:25px;
+  z-index:3000;
+  transition:.4s;
+}
+
+.sidebar.active{
+  right:0;
+}
+
+.close-btn{
+  display:flex;
+  justify-content:flex-end;
+  margin-bottom:25px;
+}
+
+.close-btn i{
+  font-size:24px;
+  cursor:pointer;
+}
+
+.sidebar-links{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+.sidebar-links a{
+  text-decoration:none;
+  color:white;
+  padding:16px 18px;
+  border-radius:18px;
+  background:rgba(255,255,255,.06);
+  transition:.3s;
+  font-size:17px;
+}
+
+.sidebar-links a:hover{
+  background:#ff9d00;
+  transform:translateX(5px);
+}
+
+/* HERO */
+
+.hero{
+  text-align:center;
+  padding:50px 20px 30px;
+}
+
+.hero h1{
+  font-size:46px;
+  margin-bottom:15px;
+}
+
+.hero p{
+  color:#ddd;
+  line-height:1.8;
+  max-width:700px;
+  margin:auto;
+}
+
+/* CONTAINER */
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:20px;
+  display:grid;
+  grid-template-columns:1.5fr .9fr;
+  gap:25px;
+}
+
+/* CART */
+
+.cart-section{
+  padding:25px;
+  border-radius:28px;
+}
+
+.section-title{
+  font-size:28px;
+  margin-bottom:25px;
+}
+
+.cart-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+  padding:20px;
+  border-radius:24px;
+  background:rgba(255,255,255,.05);
+  margin-bottom:18px;
+}
+
+.item-details{
+  flex:1;
+}
+
+.item-name{
+  font-size:21px;
+  font-weight:600;
+  margin-bottom:10px;
+}
+
+.item-price{
+  color:#ff9d00;
+  font-size:18px;
+  font-weight:700;
+}
+
+/* COUNTER */
+
+.counter{
+  display:flex;
+  align-items:center;
+  border:1px solid #ff9d00;
+  border-radius:16px;
+  overflow:hidden;
+  margin-top:14px;
+  width:max-content;
+}
+
+.counter button{
+  width:42px;
+  height:42px;
+  border:none;
+  background:transparent;
+  color:#ff9d00;
+  font-size:20px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.qty{
+  min-width:40px;
+  text-align:center;
+  font-weight:700;
+}
+
+.remove-btn{
+  margin-top:14px;
+  border:none;
+  background:none;
+  color:#ff6b6b;
+  cursor:pointer;
+  font-size:15px;
+}
+
+.item-total{
+  font-size:24px;
+  font-weight:700;
+}
+
+/* SUMMARY */
+
+.summary{
+  padding:25px;
+  border-radius:28px;
+  height:fit-content;
+  position:sticky;
+  top:90px;
+}
+
+.summary h2{
+  margin-bottom:25px;
+  font-size:28px;
+}
+
+.summary-row{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:18px;
+  color:#ddd;
+}
+
+.summary-row.total{
+  border-top:1px solid rgba(255,255,255,.1);
+  padding-top:18px;
+  margin-top:18px;
+  font-size:22px;
+  color:white;
+  font-weight:700;
+}
+
+/* ADDRESS */
+
+.address-box{
+  margin-top:25px;
+}
+
+.address-box h3{
+  margin-bottom:12px;
+}
+
+.address-box textarea{
+  width:100%;
+  height:100px;
+  border:none;
+  outline:none;
+  resize:none;
+  border-radius:18px;
+  padding:15px;
+  color:white;
+  background:rgba(255,255,255,.08);
+}
+
+.address-box textarea::placeholder{
+  color:#bbb;
+}
+
+/* PAYMENT */
+
+.payment-options{
+  margin-top:25px;
+}
+
+.payment-options h3{
+  margin-bottom:15px;
+}
+
+.payment-card{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:14px;
+  border-radius:18px;
+  background:rgba(255,255,255,.05);
+  margin-bottom:12px;
+}
+
+.payment-card input{
+  accent-color:#ff9d00;
+}
+
+/* ORDER BTN */
+
+.place-order{
+  width:100%;
+  margin-top:28px;
+  padding:16px;
+  border:none;
+  border-radius:20px;
+  background:
+  linear-gradient(135deg,#ff9d00,#ff6a00);
+  color:white;
+  font-size:18px;
+  font-weight:700;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.place-order:hover{
+  transform:translateY(-4px);
+}
+
+/* EMPTY */
+
+.empty-cart{
+  text-align:center;
+  padding:60px 20px;
+}
+
+.empty-cart i{
+  font-size:70px;
+  color:#ff9d00;
+  margin-bottom:20px;
+}
+
+.empty-cart h2{
+  margin-bottom:15px;
+  font-size:34px;
+}
+
+.empty-cart p{
+  color:#ccc;
+  margin-bottom:25px;
+}
+
+.shop-btn{
+  display:inline-block;
+  padding:14px 28px;
+  border-radius:18px;
+  background:#ff9d00;
+  color:white;
+  text-decoration:none;
+  font-weight:700;
+}
+
+/* FOOTER */
+
+footer{
+  text-align:center;
+  padding:20px;
+  color:#aaa;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+  .container{
+    grid-template-columns:1fr;
+  }
+
+  .summary{
+    position:static;
+  }
+
+}
+
+@media(max-width:600px){
+
+  .hero h1{
+    font-size:32px;
+  }
+
+  .logo h2{
+    font-size:18px;
+  }
+
+  .cart-item{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .item-total{
+    width:100%;
+    text-align:right;
+  }
+
+  .item-name{
+    font-size:18px;
+  }
+
+}
+/* HOW TO ORDER */
+
+.how-order{
+
+  margin:40px 0;
+  padding:30px;
+  border-radius:28px;
+
+}
+
+.how-order h2{
+
+  text-align:center;
+  margin-bottom:30px;
+  font-size:34px;
+  color:#ffb300;
+
+}
+
+.order-steps{
+
+  display:grid;
+
+  grid-template-columns:
+  repeat(auto-fit,minmax(220px,1fr));
+
+  gap:22px;
+
+}
+
+.step{
+
+  padding:24px;
+  border-radius:24px;
+
+  background:
+  rgba(255,255,255,0.05);
+
+  text-align:center;
+
+  transition:0.3s;
+
+}
+
+.step:hover{
+
+  transform:translateY(-6px);
+
+}
+
+.step-icon{
+
+  width:72px;
+  height:72px;
+
+  margin:auto auto 18px;
+
+  border-radius:22px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:28px;
+  color:white;
+
+  background:
+  linear-gradient(
+    45deg,
+    #ff9800,
+    #ff3d00
+  );
+
+}
+
+.step h3{
+
+  margin-bottom:12px;
+  color:white;
+  font-size:20px;
+
+}
+
+.step p{
+
+  color:#ccc;
+  line-height:1.8;
+  font-size:14px;
+
+}
+
+/* TABLET */
+
+@media(max-width:768px){
+
+  .how-order{
+
+    padding:24px;
+
+  }
+
+  .how-order h2{
+
+    font-size:28px;
+
+  }
+
+}
+
+/* MOBILE */
+
+@media(max-width:480px){
+
+  .how-order{
+
+    padding:20px;
+
+  }
+
+  .order-steps{
+
+    grid-template-columns:1fr;
+
+  }
+
+  .step{
+
+    padding:20px;
+
+  }
+
+  .step-icon{
+
+    width:62px;
+    height:62px;
+
+    font-size:24px;
+
+  }
+
+  .how-order h2{
+
+    font-size:24px;
+
+  }
+
+}
+/* HOW TO ORDER POPUP */
+
+.how-popup{
+
+  position:fixed;
+  inset:0;
+
+  background:
+  rgba(0,0,0,0.75);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:20px;
+
+  z-index:99999;
+
+}
+
+.how-box{
+
+  width:100%;
+  max-width:450px;
+
+  padding:32px;
+  border-radius:30px;
+
+  position:relative;
+
+  animation:popupShow .35s ease;
+
+}
+
+@keyframes popupShow{
+
+  from{
+
+    opacity:0;
+    transform:scale(.9);
+
+  }
+
+  to{
+
+    opacity:1;
+    transform:scale(1);
+
+  }
+
+}
+
+.close-how{
+
+  position:absolute;
+  top:18px;
+  right:18px;
+
+  width:42px;
+  height:42px;
+
+  border:none;
+  border-radius:14px;
+
+  background:
+  rgba(255,255,255,.08);
+
+  color:white;
+  font-size:20px;
+
+  cursor:pointer;
+
+}
+
+.how-box h2{
+
+  text-align:center;
+  margin-bottom:28px;
+
+  font-size:32px;
+  color:#ffb300;
+
+}
+
+.how-steps{
+
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+
+}
+
+.how-step{
+
+  display:flex;
+  align-items:flex-start;
+  gap:16px;
+
+  padding:16px;
+  border-radius:20px;
+
+  background:
+  rgba(255,255,255,.05);
+
+}
+
+.step-number{
+
+  min-width:42px;
+  height:42px;
+
+  border-radius:14px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-weight:600;
+  font-size:18px;
+
+  color:white;
+
+  background:
+  linear-gradient(
+    45deg,
+    #ff9800,
+    #ff3d00
+  );
+
+}
+
+.how-step p{
+
+  color:#ddd;
+  line-height:1.7;
+  font-size:15px;
+
+}
+
+.got-btn{
+
+  width:100%;
+  margin-top:28px;
+
+  padding:16px;
+
+  border:none;
+  border-radius:18px;
+
+  background:
+  linear-gradient(
+    45deg,
+    #ff9800,
+    #ff3d00
+  );
+
+  color:white;
+  font-size:16px;
+  font-weight:600;
+
+  cursor:pointer;
+
+}
+
+/* MOBILE */
+
+@media(max-width:480px){
+
+  .how-box{
+
+    padding:24px;
+
+  }
+
+  .how-box h2{
+
+    font-size:26px;
+
+  }
+
+  .how-step{
+
+    padding:14px;
+
+  }
+
+  .step-number{
+
+    min-width:38px;
+    height:38px;
+
+    font-size:16px;
+
+  }
+
+  .how-step p{
+
+    font-size:14px;
+
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+
+  <div class="logo">
+    <h2>
+      Hotel <span>Sree Divya Grand</span>
+    </h2>
+  </div>
+
+  <button class="menu-toggle glass"
+  onclick="openSidebar()">
+
+    <i class="fa-solid fa-bars"></i>
+
+  </button>
+
+</header>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar glass" id="sidebar">
+
+  <div class="close-btn">
+
+    <i class="fa-solid fa-xmark"
+    onclick="closeSidebar()"></i>
+
+  </div>
+
+  <div class="sidebar-links">
+
+    <a href="index.html">
+      <i class="fa-solid fa-house"></i>
+      Home
+    </a>
+
+    <a href="about.html">
+      <i class="fa-solid fa-circle-info"></i>
+      About
+    </a>
+
+    <a href="menu.html">
+      <i class="fa-solid fa-utensils"></i>
+      Menu
+    </a>
+
+    <a href="gallery.html">
+      <i class="fa-solid fa-images"></i>
+      Gallery
+    </a>
+
+    <a href="contact.html">
+      <i class="fa-solid fa-phone"></i>
+      Contact
+    </a>
+
+  </div>
+
+</div>
+
+<!-- HERO -->
+
+<section class="hero">
+
+  <h1>Your Cart</h1>
+
+  <p>
+    Review your delicious order, update quantities,
+    choose payment method and place your order instantly.
+  </p>
+
+</section>
+
+<!-- CONTAINER -->
+
+<div class="container">
+
+  <!-- CART -->
+
+  <div class="cart-section glass">
+
+    <h2 class="section-title">
+      Ordered Items
+    </h2>
+
+    <div id="cartContainer"></div>
+
+  </div>
+
+  <!-- SUMMARY -->
+
+  <div class="summary glass">
+
+    <h2>Order Summary</h2>
+
+    <div class="summary-row">
+      <span>Items Total</span>
+      <span id="itemsTotal">₹0</span>
+    </div>
+
+    
+
+    <div class="summary-row total">
+      <span>Total</span>
+      <span id="grandTotal">₹0</span>
+    </div>
+
+    <!-- ADDRESS -->
+
+    <div class="address-box"
+id="addressBox">
+
+      <h3>Delivery Address</h3>
+
+      <textarea
+      placeholder="Enter your address here...">
+      </textarea>
+
+    </div>
+
+    <!-- PAYMENT -->
+
+   <div class="payment-options"
+id="paymentSection">
+
+  <h3>Select Order Type</h3>
+
+  <div style="display:flex;flex-direction:column;gap:12px;">
+
+    <button
+id="tableBtn"
+class="place-order"
+onclick="selectOrderType('table')">
+
+  Table Order
+
+</button>
+
+    <button class="place-order"
+    style="background:#5f259f"
+    onclick="selectOrderType('takeaway')">
+
+      Takeaway
+
+    </button>
+
+    <button class="place-order"
+    style="background:#ff6a00"
+    onclick="selectOrderType('delivery')">
+
+      Delivery
+
+    </button>
+
+  </div>
+
+
+
+  <!-- WHATSAPP BUTTON -->
+
+  <button
+id="tableOrderBtn"
+class="place-order"
+style="display:none;
+background:#25D366;">
+
+Place Order on WhatsApp
+
+</button>
+
+</div>
+
+</div>
+<!-- HOW TO ORDER POPUP -->
+
+<div class="how-popup" id="howPopup">
+
+  <div class="how-box glass">
+
+    <button class="close-how"
+    onclick="closeHowPopup()">
+
+      <i class="fa-solid fa-xmark"></i>
+
+    </button>
+
+    <h2>
+      How To Order
+    </h2>
+
+    <div class="how-steps">
+
+      <div class="how-step">
+
+        <div class="step-number">
+          1
+        </div>
+
+        <p>
+          Add your favorite food
+          items to cart.
+        </p>
+
+      </div>
+
+      <div class="how-step">
+
+        <div class="step-number">
+          2
+        </div>
+
+        <p>
+          Review cart and place
+          your order.
+        </p>
+
+      </div>
+
+      <div class="how-step">
+
+        <div class="step-number">
+          3
+        </div>
+
+        <p>
+          Pay using restaurant
+          QR code.
+        </p>
+
+      </div>
+
+      <div class="how-step">
+
+        <div class="step-number">
+          4
+        </div>
+
+        <p>
+         must Upload payment
+          screenshot.
+        </p>
+
+      </div>
+
+      <div class="how-step">
+
+        <div class="step-number">
+          5
+        </div>
+
+        <p>
+          Share your live
+          location.
+        </p>
+
+      </div>
+
+      <div class="how-step">
+
+        <div class="step-number">
+          6
+        </div>
+
+        <p>
+          Sit back and enjoy
+          your delicious food.
+        </p>
+
+      </div>
+
+    </div>
+
+    <button class="got-btn"
+    onclick="closeHowPopup()">
+
+      Got It
+
+    </button>
+
+  </div>
+
+</div>
+
+
+  <div class="how-box glass">
+
+    
+
+      <i class="fa-solid fa-xmark"></i>
+
+    </button>
+
+    <h2>
+      How To Order
+    </h2>
+
+    <div class="how-steps">
+
+      <div class="how-step">
+
+        <div class="step-number">
+          1
+        </div>
+
+        <p>
+          Add your favorite food
+          items to cart.
+        </p>
+
+      </div>
+
+      <div class="how-step">
+
+        <div class="step-number">
+          2
+        </div>
+
+        <p>
+          Review cart and place
+          your order.
+        </p>
+
+      </div>
+
+      <div class="how-step">
+
+        <div class="step-number">
+          3
+        </div>
+
+        <p>
+          Pay using restaurant
+          QR code.
+        </p>
+
+      </div>
+
+      <div class="how-step">
+
+        <div class="step-number">
+          4
+        </div>
+
+        <p>
+         must Upload payment
+          screenshot.
+        </p>
+
+      </div>
+
+      <div class="how-step">
+
+        <div class="step-number">
+          5
+        </div>
+
+        <p>
+          Share your live
+          location.
+        </p>
+
+      </div>
+
+      <div class="how-step">
+
+        <div class="step-number">
+          6
+        </div>
+
+        <p>
+          Sit back and enjoy
+          your delicious food.
+        </p>
+
+      </div>
+
+    </div>
+
+   
+    
+
+  </div>
+
+</div>
+<!-- FOOTER -->
+
+<footer>
+
+  © 2026 Hotel Sree Divya Grand |
+  All Rights Reserved.
+
+  <section style="margin-top:8px;">
+    Designed by VC_VisionCraft
+  </section>
+
+</footer>
+
+<!-- SCRIPT -->
+<script>
+
+/* SHOW ONLY FIRST TIME */
+
+document.addEventListener(
+"DOMContentLoaded",
+function(){
+
+  const popupShown =
+  sessionStorage.getItem(
+    "howPopupShown"
+  );
+
+  if(!popupShown){
+
+    const popup =
+    document.getElementById(
+      "howPopup"
+    );
+
+    if(popup){
+
+      popup.style.display =
+      "flex";
+
+    }
+
+  }
+
+});
+
+/* CLOSE POPUP */
+
+function closeHowPopup(){
+
+  const popup =
+  document.getElementById(
+    "howPopup"
+  );
+
+  if(popup){
+
+    popup.style.display =
+    "none";
+
+  }
+
+  /* SAVE SESSION */
+
+  sessionStorage.setItem(
+    "howPopupShown",
+    "true"
+  );
+
+}
+
+</script>
+<script>
+
+/* =========================
+GLOBAL VARIABLES
+========================= */
+
+let currentOrderType = "";
+
+const savedTable =
+localStorage.getItem("tableNumber");
+
+const tableNumber =
+(savedTable &&
+ savedTable !== "null" &&
+ savedTable !== "--")
+ ? savedTable
+ : null;
+
+let cart =
+JSON.parse(localStorage.getItem("cart")) || [];
+
+/* =========================
+WINDOW LOAD
+========================= */
+
+window.onload = function(){
+
+  if(tableNumber){
+
+    document
+    .getElementById("addressBox")
+    .style.display = "none";
+
+    document
+    .getElementById("paymentSection")
+    .style.display = "none";
+
+    document
+    .getElementById("tableOrderBtn")
+    .style.display = "block";
+
+  }
+
+  const tableBtn =
+  document.getElementById("tableBtn");
+
+  if(!tableNumber && tableBtn){
+
+    tableBtn.style.display = "none";
+
+  }
+
+}
+
+/* =========================
+SIDEBAR
+========================= */
+
+function openSidebar(){
+
+  document
+  .getElementById("sidebar")
+  .classList.add("active");
+
+}
+
+function closeSidebar(){
+
+  document
+  .getElementById("sidebar")
+  .classList.remove("active");
+
+}
+
+/* =========================
+ELEMENTS
+========================= */
+
+const cartContainer =
+document.getElementById("cartContainer");
+
+const itemsTotal =
+document.getElementById("itemsTotal");
+
+const grandTotal =
+document.getElementById("grandTotal");
+
+/* =========================
+RENDER CART
+========================= */
+
+function renderCart(){
+
+  if(cart.length === 0){
+
+    cartContainer.innerHTML = `
+
+    <div class="empty-cart">
+
+      <i class="fa-solid fa-cart-shopping"></i>
+
+      <h2>Your Cart is Empty</h2>
+
+      <p>Add your favorite dishes from menu.</p>
+
+      <a href="menu.html" class="shop-btn">
+        Explore Menu
+      </a>
+
+    </div>
+
+    `;
+
+    itemsTotal.textContent = "₹0";
+    grandTotal.textContent = "₹0";
+
+    return;
+  }
+
+  cartContainer.innerHTML = "";
+
+  let subtotal = 0;
+
+  cart.forEach((item,index)=>{
+
+    subtotal += item.price * item.qty;
+
+    cartContainer.innerHTML += `
+
+    <div class="cart-item">
+
+      <div class="item-details">
+
+        <div class="item-name">
+          ${item.name}
+        </div>
+
+        <div class="item-price">
+          ₹${item.price}
+        </div>
+
+        <div class="counter">
+
+          <button onclick="changeQty(${index},-1)">-</button>
+
+          <span class="qty">
+            ${item.qty}
+          </span>
+
+          <button onclick="changeQty(${index},1)">+</button>
+
+        </div>
+
+        <button class="remove-btn"
+        onclick="removeItem(${index})">
+
+          <i class="fa-solid fa-trash"></i>
+          Remove
+
+        </button>
+
+      </div>
+
+      <div class="item-total">
+        ₹${item.price * item.qty}
+      </div>
+
+    </div>
+
+    `;
+
+  });
+
+  const finalTotal = subtotal + 0;
+
+  itemsTotal.textContent = `₹${subtotal}`;
+  grandTotal.textContent = `₹${finalTotal}`;
+
+}
+
+/* =========================
+CHANGE QTY
+========================= */
+
+function changeQty(index,change){
+
+  cart[index].qty += change;
+
+  if(cart[index].qty <= 0){
+
+    cart.splice(index,1);
+
+  }
+
+  localStorage.setItem(
+    "cart",
+    JSON.stringify(cart)
+  );
+
+  renderCart();
+
+}
+
+/* =========================
+REMOVE ITEM
+========================= */
+
+function removeItem(index){
+
+  cart.splice(index,1);
+
+  localStorage.setItem(
+    "cart",
+    JSON.stringify(cart)
+  );
+
+  renderCart();
+
+}
+
+/* =========================
+SELECT ORDER TYPE
+========================= */
+
+function selectOrderType(type){
+
+  currentOrderType = type;
+
+  sendWhatsAppOrder();
+
+}
+
+/* =========================
+TABLE ORDER BUTTON
+========================= */
+
+document
+.getElementById("tableOrderBtn")
+.onclick = function(){
+
+  currentOrderType = "table";
+
+  sendWhatsAppOrder();
+
+}
+
+/* =========================
+SEND WHATSAPP ORDER
+========================= */
+
+function sendWhatsAppOrder(){
+
+  if(cart.length === 0){
+    alert("Cart is empty!");
+    return;
+  }
+
+  if(
+    currentOrderType === "delivery" &&
+    !tableNumber
+  ){
+
+    const address =
+    document.querySelector("textarea").value;
+
+    if(address.trim() === ""){
+      alert("Please enter delivery address");
+      return;
+    }
+
+  }
+
+  let subtotal = 0;
+
+  let message =
+  "🍽️ *Hotel Sree Divya Grand Order*%0A%0A";
+
+  if(tableNumber){
+
+    message +=
+    `🪑 Table Number: ${tableNumber}%0A`;
+
+    message +=
+    `📦 Order Type: Table Order%0A%0A`;
+
+  }
+
+  else{
+
+    let orderTypeText = "";
+
+    if(currentOrderType === "delivery"){
+      orderTypeText = "🚚 Delivery";
+    }
+    else if(currentOrderType === "takeaway"){
+      orderTypeText = "🥡 Takeaway";
+    }
+    else{
+      orderTypeText = "🍽️ Table Order";
+    }
+
+    message +=
+    `📦 Order Type: ${orderTypeText}%0A%0A`;
+
+  }
+
+  cart.forEach(item=>{
+
+    subtotal += item.price * item.qty;
+
+    message +=
+    `• ${item.name} x ${item.qty} = ₹${item.price * item.qty}%0A`;
+
+  });
+
+  const deliveryFee =
+  currentOrderType === "delivery"
+  ? 10
+  : 0;
+
+  const finalTotal =
+  subtotal + deliveryFee;
+
+  message +=
+  `%0A💰 Total: ₹${finalTotal}`;
+
+  if(currentOrderType === "delivery"){
+
+    const address =
+    document.querySelector("textarea").value;
+
+    message +=
+    `%0A📍 Address: ${encodeURIComponent(address)}`;
+
+  }
+
+  window.open(
+    `https://wa.me/917901503548?text=${message}`,
+    "_blank"
+  );
+
+}
+
+/* =========================
+INIT
+========================= */
+
+renderCart();
+</script>
+
+</body>
+</html>

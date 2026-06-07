@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hotel Sree Divya Grand - Menu</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+}
+
+body{
+  background:linear-gradient(135deg,#0b0b12,#1a1020);
+  min-height:100vh;
+  color:white;
+  overflow-x:hidden;
+  padding-bottom:120px;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:radial-gradient(circle at top right, rgba(255,140,0,0.18), transparent 40%);
+  z-index:-1;
+}
+
+.glass{
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(18px);
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 10px 40px rgba(0,0,0,.35);
+}
+
+/* HEADER */
+
+header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  padding:15px 5%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.logo h2{
+  font-size:24px;
+}
+
+.logo span{
+  color:#ff9d00;
+}
+
+/* CART BUTTON */
+
+.cart-header-btn{
+  width:55px;
+  height:55px;
+  border-radius:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  color:white;
+  font-size:22px;
+  position:relative;
+}
+
+.cartCount{
+  position:absolute;
+  top:-6px;
+  right:-6px;
+  background:#d84315;
+  color:white;
+  width:24px;
+  height:24px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:12px;
+  font-weight:700;
+}
+
+/* BLOBS */
+
+.blob{
+  position:fixed;
+  border-radius:50%;
+  filter:blur(80px);
+  z-index:-1;
+}
+
+.b1{
+  width:280px;
+  height:280px;
+  background:rgba(255,140,0,.18);
+  top:-10%;
+  left:-10%;
+}
+
+.b2{
+  width:380px;
+  height:380px;
+  background:rgba(255,80,120,.15);
+  right:-10%;
+  bottom:-10%;
+}
+
+/* CONTAINER */
+
+.container{
+  max-width:700px;
+  margin:auto;
+  padding:20px;
+}
+
+/* TITLE ROW */
+
+.menu-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+  gap:10px;
+}
+
+.menu-title{
+  background:linear-gradient(90deg,#fff,#ff9d00);
+
+  background-clip:text;
+  -webkit-background-clip:text;
+
+  color:transparent;
+  -webkit-text-fill-color:transparent;
+}
+
+.tableBadge{
+  padding:12px 18px;
+  border-radius:18px;
+  font-weight:600;
+}
+
+/* BANNER */
+
+.header-banner{
+  width:100%;
+  border-radius:22px;
+  overflow:hidden;
+  margin-bottom:20px;
+}
+
+.header-banner img{
+  width:100%;
+  height:300px;
+  object-fit:cover;
+  display:block;
+}
+
+/* CATEGORIES */
+
+.categories{
+  position:sticky;
+  top:90px;
+  z-index:100;
+  display:flex;
+  gap:10px;
+  overflow:auto;
+  padding:14px;
+  border-radius:22px;
+  margin-bottom:20px;
+}
+
+.categories::-webkit-scrollbar{
+  display:none;
+}
+
+.cat{
+  padding:10px 18px;
+  border:none;
+  border-radius:18px;
+  background:rgba(255,255,255,.08);
+  color:white;
+  cursor:pointer;
+  font-weight:600;
+  white-space:nowrap;
+}
+
+.cat.active{
+  background:#ff9d00;
+  color:#fff;
+}
+
+/* SECTION */
+
+.section{
+  margin-bottom:28px;
+}
+
+.section h2{
+  margin-bottom:14px;
+  padding-left:12px;
+  position:relative;
+}
+
+.section h2:before{
+  content:'';
+  position:absolute;
+  left:0;
+  top:10%;
+  height:80%;
+  width:4px;
+  background:#d84315;
+  border-radius:4px;
+}
+
+/* CARD */
+
+.card{
+  padding:18px;
+  border-radius:22px;
+  margin-bottom:14px;
+}
+
+.row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+
+.name{
+  font-size:18px;
+  font-weight:600;
+}
+
+.price{
+  color:#ff9d00;
+  font-size:18px;
+  font-weight:700;
+  margin-top:8px;
+}
+
+/* BUTTON */
+
+.add-btn{
+  padding:8px 18px;
+  border-radius:16px;
+  border:1px solid #d84315;
+  background:rgba(255,255,255,.7);
+  color:#d84315;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.counter{
+  display:flex;
+  align-items:center;
+  border:1px solid #d84315;
+  border-radius:16px;
+  overflow:hidden;
+  background:rgba(255,255,255,.7);
+}
+
+.counter button{
+  border:none;
+  background:transparent;
+  padding:8px 14px;
+  color:#d84315;
+  font-size:18px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.qty{
+  min-width:26px;
+  text-align:center;
+  font-weight:700;
+  color:black;
+}
+
+/* CART MODAL */
+
+.cartModal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  z-index:2000;
+}
+
+.cartBox{
+  width:100%;
+  max-width:500px;
+  padding:20px;
+  border-radius:24px;
+  max-height:80vh;
+  overflow:auto;
+}
+
+.cartItem{
+  display:flex;
+  justify-content:space-between;
+  margin:10px 0;
+}
+
+.checkout{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:16px;
+  background:#d84315;
+  color:#fff;
+  font-weight:700;
+  margin-top:15px;
+}
+
+/* BOTTOM NAV */
+
+.bottom-nav{
+  position:fixed;
+  bottom:15px;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(95%,520px);
+  padding:16px;
+  display:flex;
+  justify-content:space-around;
+  border-radius:30px;
+  z-index:1000;
+}
+
+.bottom-nav a{
+  color:white;
+  font-size:22px;
+  text-decoration:none;
+  transition:.3s;
+}
+
+.bottom-nav a:hover{
+  color:#ff9d00;
+  transform:translateY(-5px);
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+  .logo h2{
+    font-size:18px;
+  }
+
+  .menu-title{
+    font-size:22px;
+  }
+
+  .tableBadge{
+    font-size:14px;
+    padding:10px 14px;
+  }
+
+  .header-banner img{
+    height:210px;
+  }
+
+  .name{
+    font-size:16px;
+  }
+
+  .price{
+    font-size:16px;
+  }
+}
+
+.toast{
+  position:fixed;
+  bottom:100px;
+  left:50%;
+  transform:translateX(-50%) translateY(20px);
+  background:#d84315;
+  color:#fff;
+  padding:12px 20px;
+  border-radius:12px;
+  font-weight:600;
+  opacity:0;
+  visibility:hidden;
+  transition:.3s;
+  z-index:3000;
+}
+
+.toast.show{
+  opacity:1;
+  visibility:visible;
+  transform:translateX(-50%) translateY(0);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="blob b1"></div>
+<div class="blob b2"></div>
+
+<!-- HEADER -->
+
+<header>
+
+  <div class="logo">
+    <h2>Hotel <span>Sree Divya Grand</span></h2>
+  </div>
+
+  <a href="cart.html" class="cart-header-btn glass">
+    <i class="fa-solid fa-cart-shopping"></i>
+    <span class="cartCount" id="cartCount">0</span>
+  </a>
+
+</header>
+
+<!-- CART MODAL -->
+
+<div class="cartModal" id="cartModal">
+
+  <div class="cartBox glass">
+
+    <h2>Your Cart</h2>
+
+    <div id="cartItems"></div>
+
+    <button class="checkout">
+      Place Order
+    </button>
+
+  </div>
+
+</div>
+
+<!-- CONTENT -->
+
+<div class="container">
+
+  <!-- MENU TITLE -->
+
+  <div class="menu-top">
+
+    <h1 class="menu-title">
+      Explore Our Menu
+    </h1>
+
+    <div class="tableBadge glass" id="tableBadge">
+      Table: --
+    </div>
+
+  </div>
+
+  <!-- BANNER -->
+
+  <div class="header-banner glass">
+    <img src="banner.jpg" alt="Hotel Sree Divya Grand">
+  </div>
+
+  <!-- CATEGORIES -->
+
+  <div class="categories glass" id="categories"></div>
+
+  <!-- MENU -->
+
+  <div id="menu"></div>
+
+</div>
+
+<!-- SCRIPT -->
+
+<script type="module">
+
+import { initializeApp } from
+"https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+
+import {
+  getDatabase,
+  ref,
+  onValue
+} from
+"https://www.gstatic.com/firebasejs/12.14.0/firebase-database.js";
+
+/* FIREBASE */
+
+const firebaseConfig = {
+
+  apiKey: "AIzaSyCMGNc8WlryR0_GCt24v88FdmPp6EI_xAE",
+
+  authDomain:
+  "resturant-5fae9.firebaseapp.com",
+
+  databaseURL:
+  "https://resturant-5fae9-default-rtdb.firebaseio.com",
+
+  projectId: "resturant-5fae9",
+
+  storageBucket:
+  "resturant-5fae9.firebasestorage.app",
+
+  messagingSenderId:
+  "171303937190",
+
+  appId:
+  "1:171303937190:web:8693d7306e410724fb0067"
+
+};
+
+const app =
+initializeApp(firebaseConfig);
+
+const db =
+getDatabase(app);
+
+/* URL PARAMS */
+
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const tableNumber =
+params.get("table");
+
+/* TABLE */
+
+if(tableNumber){
+
+  localStorage.setItem(
+    "tableNumber",
+    tableNumber
+  );
+
+}
+
+document.getElementById(
+"tableBadge"
+).textContent =
+"Table: " + (tableNumber || "--");
+
+/* ELEMENTS */
+
+const menu =
+document.getElementById("menu");
+
+const cats =
+document.getElementById("categories");
+
+/* CART */
+
+let cart =
+JSON.parse(
+localStorage.getItem("cart")
+) || [];
+
+/* STORE CURRENT DATA */
+
+let currentGrouped = {};
+
+/* FETCH FIREBASE DATA */
+
+onValue(
+ref(db,"restaurantItems"),
+(snapshot)=>{
+
+  const data =
+  snapshot.val();
+
+  if(!data){
+
+    menu.innerHTML =
+    "<p>No items available</p>";
+
+    return;
+
+  }
+
+  const items =
+  Object.values(data);
+
+  currentGrouped = {};
+
+  items.forEach(item=>{
+
+    if(!currentGrouped[item.category]){
+
+      currentGrouped[item.category] = [];
+
+    }
+
+    currentGrouped[item.category]
+    .push(item);
+
+  });
+
+  render();
+
+});
+
+/* RENDER */
+
+function render(){
+
+  menu.innerHTML = "";
+
+  cats.innerHTML = "";
+
+  let first = true;
+
+  Object.keys(currentGrouped)
+  .forEach(cat=>{
+
+    /* CATEGORY BUTTON */
+
+    const catBtn =
+    document.createElement("button");
+
+    catBtn.className =
+    "cat" +
+    (first ? " active" : "");
+
+    catBtn.textContent = cat;
+
+    catBtn.onclick = e=>{
+
+      document
+      .querySelectorAll(".cat")
+      .forEach(btn=>
+        btn.classList.remove("active")
+      );
+
+      e.target.classList.add("active");
+
+      document
+      .getElementById("sec-"+cat)
+      .scrollIntoView({
+        behavior:"smooth"
+      });
+
+    };
+
+    cats.appendChild(catBtn);
+
+    /* SECTION */
+
+    const sec =
+    document.createElement("div");
+
+    sec.className =
+    "section";
+
+    sec.id =
+    "sec-"+cat;
+
+    sec.innerHTML =
+    `<h2>${cat}</h2>`;
+
+    currentGrouped[cat]
+    .forEach((item,idx)=>{
+
+      const id =
+      cat + "-" + idx;
+
+      const existing =
+      cart.find(x=>x.id===id);
+
+      const qty =
+      existing ? existing.qty : 0;
+
+      const card =
+      document.createElement("div");
+
+      card.className =
+      "card glass";
+
+      card.innerHTML = `
+
+      <div class="row">
+
+        <div>
+
+          <div class="name">
+
+            ${item.name}
+
+          </div>
+
+          <div class="price">
+
+            ₹${item.price}
+
+          </div>
+
+        </div>
+
+        <div>
+
+          ${
+            qty === 0
+
+            ?
+
+            `<button
+            class="add-btn"
+
+            onclick='addItem(
+              "${id}",
+              "${item.name}",
+              ${item.price}
+            )'>
+
+            ADD
+
+            </button>`
+
+            :
+
+            `<div class="counter">
+
+              <button
+              onclick='changeQty(
+              "${id}",
+              -1
+              )'>
+
+              -
+
+              </button>
+
+              <span class="qty">
+
+                ${qty}
+
+              </span>
+
+              <button
+              onclick='changeQty(
+              "${id}",
+              1
+              )'>
+
+              +
+
+              </button>
+
+            </div>`
+
+          }
+
+        </div>
+
+      </div>
+
+      `;
+
+      sec.appendChild(card);
+
+    });
+
+    menu.appendChild(sec);
+
+    first = false;
+
+  });
+
+}
+
+/* SAVE CART */
+
+function saveCart(){
+
+  localStorage.setItem(
+    "cart",
+    JSON.stringify(cart)
+  );
+
+}
+
+/* UPDATE COUNT */
+
+function updateCount(){
+
+  const total =
+  cart.reduce(
+    (a,b)=>a+b.qty,
+    0
+  );
+
+  document.getElementById(
+    "cartCount"
+  ).textContent = total;
+
+}
+
+function showToast(message){
+
+  const toast =
+  document.getElementById("toast");
+
+  toast.textContent = message;
+
+  toast.classList.add("show");
+
+  clearTimeout(toast.timer);
+
+  toast.timer = setTimeout(()=>{
+    toast.classList.remove("show");
+  },2000);
+
+}
+
+/* ADD ITEM */
+
+window.addItem =
+function(id,name,price){
+
+  const existing =
+  cart.find(x=>x.id===id);
+
+  if(existing){
+
+    existing.qty++;
+
+  }else{
+
+    cart.push({
+
+      id,
+      name,
+      price,
+      qty:1,
+
+      table:
+      tableNumber || "--"
+
+    });
+
+  }
+
+  saveCart();
+
+  updateCount();
+
+  showToast(name + " added to cart");
+
+  render();
+
+}
+
+/* CHANGE QTY */
+
+window.changeQty =
+function(id,change){
+
+  const item =
+  cart.find(x=>x.id===id);
+
+  if(!item) return;
+
+  item.qty += change;
+
+  if(item.qty <= 0){
+
+    cart =
+    cart.filter(
+      x=>x.id!==id
+    );
+
+  }
+
+  saveCart();
+
+  updateCount();
+
+  render();
+
+}
+
+
+/* INIT */
+
+updateCount();
+
+</script>
+
+<div class="toast" id="toast"></div>
+
+</body>
+</html>

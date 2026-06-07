@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About | Hotel Divya Shree Grand</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+}
+
+body{
+  background:linear-gradient(135deg,#0b0b12,#1a1020);
+  color:white;
+  overflow-x:hidden;
+  padding-bottom:100px;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:radial-gradient(circle at top right, rgba(255,140,0,0.18), transparent 40%);
+  z-index:-1;
+}
+
+header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  padding:15px 5%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,0.08);
+}
+.menu-toggle{
+  width:50px;
+  height:50px;
+  border:none;
+  border-radius:16px;
+  background:rgba(255,255,255,0.08);
+  color:white;
+  font-size:20px;
+  cursor:pointer;
+  backdrop-filter:blur(18px);
+}
+
+.sidebar{
+  position:fixed;
+  top:0;
+  right:-320px;
+  width:300px;
+  height:100%;
+  padding:25px;
+  z-index:3000;
+  transition:.4s;
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(18px);
+  border-left:1px solid rgba(255,255,255,0.08);
+}
+
+.sidebar.active{
+  right:0;
+}
+
+.sidebar-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.45);
+  z-index:2500;
+  display:none;
+}
+
+.sidebar-overlay.active{
+  display:block;
+}
+
+.close-btn{
+  display:flex;
+  justify-content:flex-end;
+  margin-bottom:25px;
+}
+
+.close-btn i{
+  font-size:26px;
+  cursor:pointer;
+}
+
+.sidebar-links{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+.sidebar-links a{
+  text-decoration:none;
+  color:white;
+  padding:16px 18px;
+  border-radius:18px;
+  background:rgba(255,255,255,.06);
+  transition:.3s;
+}
+
+.sidebar-links a:hover{
+  background:#ff9d00;
+  transform:translateX(5px);
+}
+.logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.logo img{
+  width:55px;
+  height:55px;
+  border-radius:14px;
+  padding:8px;
+  background:rgba(255,255,255,0.08);
+}
+
+.logo h2{
+  font-size:22px;
+}
+
+.logo span{
+  color:#ff9d00;
+}
+
+.hero{
+  text-align:center;
+  padding:80px 20px 50px;
+}
+
+.hero h1{
+  font-size:52px;
+  margin-bottom:20px;
+}
+
+.hero p{
+  max-width:850px;
+  margin:auto;
+  line-height:1.8;
+  color:#ddd;
+  font-size:18px;
+}
+
+.about-section{
+  max-width:1200px;
+  margin:auto;
+  padding:20px;
+}
+
+.about-card{
+  display:flex;
+  gap:40px;
+  align-items:center;
+  padding:40px;
+  border-radius:30px;
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(18px);
+  border:1px solid rgba(255,255,255,0.08);
+  box-shadow:0 10px 40px rgba(0,0,0,0.35);
+}
+
+.owner-image img{
+  width:350px;
+  height:420px;
+  object-fit:cover;
+  border-radius:25px;
+  box-shadow:0 0 35px rgba(255,140,0,0.3);
+}
+
+.about-content{
+  flex:1;
+}
+
+.about-content h2{
+  font-size:40px;
+  margin-bottom:18px;
+}
+
+.about-content p{
+  color:#ddd;
+  line-height:1.9;
+  margin-bottom:15px;
+}
+
+.owner-box{
+  margin-top:25px;
+  padding:22px;
+  border-radius:20px;
+  background:rgba(255,255,255,0.06);
+}
+
+.owner-box h3{
+  color:#ffb347;
+  font-size:28px;
+  margin-bottom:8px;
+}
+
+.stats{
+  max-width:1200px;
+  margin:50px auto;
+  padding:0 20px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+}
+
+.stat{
+  padding:30px;
+  border-radius:24px;
+  text-align:center;
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(18px);
+}
+
+.stat h2{
+  color:#ff9d00;
+  font-size:38px;
+}
+
+.stat p{
+  color:#ddd;
+  margin-top:10px;
+}
+
+.mission{
+  max-width:1200px;
+  margin:auto;
+  padding:20px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:25px;
+}
+
+.mission-card{
+  padding:30px;
+  border-radius:24px;
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(18px);
+}
+
+.mission-card i{
+  font-size:40px;
+  color:#ff9d00;
+  margin-bottom:15px;
+}
+
+.mission-card h3{
+  font-size:26px;
+  margin-bottom:12px;
+}
+
+.mission-card p{
+  color:#ddd;
+  line-height:1.7;
+}
+
+.social{
+  text-align:center;
+  padding:60px 20px;
+}
+
+.social h2{
+  font-size:34px;
+  margin-bottom:20px;
+}
+
+.social-icons{
+  display:flex;
+  justify-content:center;
+  gap:18px;
+  flex-wrap:wrap;
+}
+
+.social-icons a{
+  width:55px;
+  height:55px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  font-size:22px;
+  text-decoration:none;
+  background:rgba(255,255,255,0.08);
+  transition:0.3s;
+}
+
+.social-icons a:hover{
+  background:#ff8c00;
+  transform:translateY(-6px);
+}
+
+.bottom-nav{
+  position:fixed;
+  bottom:15px;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(95%,520px);
+  padding:16px;
+  display:flex;
+  justify-content:space-around;
+  border-radius:30px;
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(18px);
+  border:1px solid rgba(255,255,255,0.08);
+  z-index:1000;
+}
+
+.bottom-nav a{
+  color:white;
+  font-size:22px;
+  text-decoration:none;
+  transition:.3s;
+}
+
+.bottom-nav a:hover{
+  color:#ff9d00;
+  transform:translateY(-5px);
+}
+
+footer{
+  text-align:center;
+  padding:20px;
+  color:#aaa;
+}
+
+@media(max-width:900px){
+  .about-card{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .owner-image img{
+    width:260px;
+    height:320px;
+  }
+
+  .hero h1{
+    font-size:36px;
+  }
+
+  .about-content h2{
+    font-size:30px;
+  }
+}
+
+@media(max-width:600px){
+  .hero h1{
+    font-size:28px;
+  }
+
+  .hero p{
+    font-size:15px;
+  }
+
+  .logo h2{
+    font-size:18px;
+  }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <h2>Hotel <span>Sree Divya Grand</span></h2>
+  </div>
+
+  <button class="menu-toggle" onclick="openSidebar()">
+    <i class="fa-solid fa-bars"></i>
+  </button>
+</header>
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+<div class="sidebar" id="sidebar">
+  <div class="close-btn">
+    <i class="fa-solid fa-xmark" onclick="closeSidebar()"></i>
+  </div>
+
+  <div class="sidebar-links">
+    <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="about.html"><i class="fa-solid fa-circle-info"></i> About</a>
+    <a href="menu.html"><i class="fa-solid fa-utensils"></i> Menu</a>
+    <a href="gallery.html"><i class="fa-solid fa-images"></i> Gallery</a>
+    <a href="contact.html"><i class="fa-solid fa-phone"></i> Contact</a>
+  </div>
+</div>
+<section class="hero">
+  <h1>About Hotel Divya Shree Grand</h1>
+  <p>
+    Hotel Divya Shree Grand is a premium dining destination delivering authentic Indian cuisine,
+    luxurious hospitality, and unforgettable food experiences with modern elegance.
+  </p>
+</section>
+
+<section class="about-section">
+  <div class="about-card">
+
+    <div class="owner-image">
+      <img src="owner.jpg" alt="Owner">
+    </div>
+
+    <div class="about-content">
+      <h2>Our Story</h2>
+
+      <p>
+        Hotel Divya Shree Grand was founded with a passion to create a premium culinary destination
+        where authentic Indian flavors meet exceptional hospitality.
+      </p>
+
+      <p>
+        From aromatic biryanis and South Indian delicacies to rich curries and signature specialties,
+        every dish is crafted with tradition, care, and premium quality ingredients.
+      </p>
+
+      <div class="owner-box">
+        <h3>Mr. A T Yadav</h3>
+        <p>Founder & Owner</p>
+        <p>
+          A passionate restaurateur committed to excellence, customer satisfaction,
+          and redefining Indian dining experiences.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="stats">
+  <div class="stat">
+    <h2>5+</h2>
+    <p>Years Experience</p>
+  </div>
+
+  <div class="stat">
+    <h2>5000+</h2>
+    <p>Happy Customers</p>
+  </div>
+
+  <div class="stat">
+    <h2>50+</h2>
+    <p>Signature Dishes</p>
+  </div>
+
+  <div class="stat">
+    <h2>4.9★</h2>
+    <p>Customer Rating</p>
+  </div>
+</section>
+
+<section class="mission">
+  <div class="mission-card">
+    <i class="fa-solid fa-bullseye"></i>
+    <h3>Our Mission</h3>
+    <p>
+      Deliver exceptional Indian cuisine with premium quality, hygiene, and unforgettable hospitality.
+    </p>
+  </div>
+
+  <div class="mission-card">
+    <i class="fa-solid fa-eye"></i>
+    <h3>Our Vision</h3>
+    <p>
+      Become the most loved premium dining destination blending authentic taste with modern excellence.
+    </p>
+  </div>
+
+  <div class="mission-card">
+    <i class="fa-solid fa-heart"></i>
+    <h3>Our Values</h3>
+    <p>
+      Authenticity, quality ingredients, hospitality, customer happiness, and culinary innovation.
+    </p>
+  </div>
+</section>
+
+<section class="social">
+  <h2>Connect With Us</h2>
+
+  <div class="social-icons">
+    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+    <a href="#"><i class="fa-solid fa-envelope"></i></a>
+    <a href="#"><i class="fa-solid fa-phone"></i></a>
+  </div>
+</section>
+
+<footer>
+  © 2026 Hotel Divya Shree Grand | All Rights Reserved. 
+  
+  <section>
+  Designed by VC_VisionCraft 
+  </section>
+  
+</footer>
+
+<nav class="bottom-nav">
+  <a href="index.html"><i class="fa-solid fa-house"></i></a>
+  <a href="about.html"><i class="fa-solid fa-user"></i></a>
+  <a href="menu.html"><i class="fa-solid fa-utensils"></i></a>
+  <a href="gallery.html"><i class="fa-solid fa-images"></i></a>
+  <a href="contact.html"><i class="fa-solid fa-phone"></i></a>
+</nav>
+<script>
+function openSidebar(){
+  document.getElementById("sidebar").classList.add("active");
+  document.getElementById("sidebarOverlay").classList.add("active");
+}
+
+function closeSidebar(){
+  document.getElementById("sidebar").classList.remove("active");
+  document.getElementById("sidebarOverlay").classList.remove("active");
+}
+</script>
+</body>
+</html>
