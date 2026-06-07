@@ -4,7 +4,6 @@ Premium Restaurant Ordering Platform
 A professionally crafted restaurant website developed for **Hotel Sree Divya Grand, Kadthal**, designed to enhance customer engagement and simplify the food ordering experience. The platform combines elegant design, intuitive navigation, and seamless ordering functionality to provide a modern digital presence for the restaurant.
 
 🌐 **Live Website:**
-[https://jsdl.in/DT-99B5CCCU9RI](https://jsdl.in/DT-99B5CCCU9RI)
 
 ---
 
@@ -183,8 +182,6 @@ Mobile Responsive Views
 Crafting modern digital experiences for businesses through innovative web solutions.
 
 📧 **Email:** [visioncraft110@gmail.com](mailto:visioncraft110@gmail.com)
-
-🌐 **Portfolio:** [https://newsandarshini.in](https://newsandarshini.in)
 
 ---
 
