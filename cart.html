@@ -875,11 +875,9 @@ footer{
     <h2>Order Summary</h2>
 
     <div class="summary-row">
-      <span>Items Total</span>
-      <span id="itemsTotal">₹0</span>
-    </div>
-
-    
+  <span>Total Items</span>
+  <span id="itemsTotal">0</span>
+</div>
 
     <div class="summary-row total">
       <span>Total</span>
@@ -1357,10 +1355,14 @@ function renderCart(){
 
   let subtotal = 0;
 
+let totalItems = 0;
+
   cart.forEach((item,index)=>{
 
     subtotal += item.price * item.qty;
 
+    totalItems += item.qty;
+    
     cartContainer.innerHTML += `
 
     <div class="cart-item">
@@ -1409,7 +1411,7 @@ function renderCart(){
 
   const finalTotal = subtotal + 0;
 
-  itemsTotal.textContent = `₹${subtotal}`;
+  itemsTotal.textContent = totalItems;
   grandTotal.textContent = `₹${finalTotal}`;
 
 }
