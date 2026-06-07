@@ -171,8 +171,6 @@ Gallery Section
 Mobile Responsive Views
 ```
 
-*(Project screenshots can be added here.)*
-
 ---
 
 ## 👨‍💻 Developed By
