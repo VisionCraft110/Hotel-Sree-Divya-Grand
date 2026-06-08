@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Menu | Hotel Sree Divya Grand</title>
-<meta name="robots" content="noindex,follow">
+<title>Hotel Sree Divya Grand - Menu</title>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
@@ -504,17 +504,23 @@ header{
 <script type="module">
 function showToast(message){
 
-  const toast =
-  document.getElementById("toast");
+  const toast = document.getElementById("toast");
 
   toast.textContent = message;
-
   toast.classList.add("show");
+
+  const sound = document.getElementById("toastSound");
+
+  sound.pause();
+  sound.currentTime = 0;
+
+  sound.play().catch(err=>{
+    console.log("Sound blocked:", err);
+  });
 
   setTimeout(()=>{
     toast.classList.remove("show");
   },1500);
-
 }
 import { initializeApp } from
 "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
@@ -910,5 +916,10 @@ updateCount();
 
 </script>
 <div id="toast" class="toast"></div>
+
+<audio id="toastSound" preload="auto">
+  <source src="notification.mp3" type="audio/mpeg">
+</audio>
+
 </body>
 </html>
