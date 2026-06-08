@@ -860,15 +860,47 @@ footer{
 
   <div class="cart-section glass">
 
-    <h2 class="section-title">
-      Ordered Items
-    </h2>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:25px;">
+
+  <h2 class="section-title" style="margin:0;">
+    Ordered Items
+  </h2>
+
+  <button
+    onclick="refreshCart()"
+    class="glass"
+    style="
+      width:50px;
+      height:50px;
+      border:none;
+      border-radius:16px;
+      color:white;
+      font-size:20px;
+      cursor:pointer;
+    ">
+    <i class="fa-solid fa-rotate-right"></i>
+  </button>
+
+</div>
 
     <div id="cartContainer"></div>
 
   </div>
 
   <!-- SUMMARY -->
+  
+<div id="cartTableBadge"
+style="
+display:none;
+margin-bottom:15px;
+padding:12px 16px;
+border-radius:16px;
+background:rgba(255,255,255,.08);
+font-weight:600;
+color:#fff;
+">
+ Table: --
+</div>
 
   <div class="summary glass">
 
@@ -1285,7 +1317,18 @@ window.onload = function(){
   }
 
 }
+const cartTableBadge =
+document.getElementById("cartTableBadge");
 
+if(tableNumber){
+
+  cartTableBadge.style.display =
+  "block";
+
+  cartTableBadge.textContent =
+  " Table: " + tableNumber;
+
+}
 /* =========================
 SIDEBAR
 ========================= */
@@ -1582,6 +1625,32 @@ function sendWhatsAppOrder(){
 /* =========================
 INIT
 ========================= */
+function refreshCart(){
+
+  cart =
+  JSON.parse(
+    localStorage.getItem("cart")
+  ) || [];
+
+  renderCart();
+
+}
+
+function refreshCart(){
+
+  const confirmClear = confirm(
+    "Are you sure you want to clear all cart items?"
+  );
+
+  if(confirmClear){
+
+    localStorage.removeItem("cart");
+
+    location.reload();
+
+  }
+
+}
 
 renderCart();
 </script>
