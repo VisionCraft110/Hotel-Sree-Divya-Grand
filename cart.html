@@ -1087,7 +1087,7 @@ Delivery
 
   <div style="margin-top:8px;">
     Designed by VC_VisionCraft
-  </section>
+  </div>
 
 </footer>
 
@@ -1179,7 +1179,7 @@ cart = cart.map(item => ({
 WINDOW LOAD
 ========================= */
 
-window.onload = function(){
+window.addEventListener("load", function(){
 
     const tableBtn = document.getElementById("tableBtn");
     const takeawayBtn = document.getElementById("takeawayBtn");
@@ -1199,9 +1199,8 @@ window.onload = function(){
         document.getElementById("addressBox").style.display = "none";
 
         badge.style.display = "block";
-        badge.innerHTML =
+        badge.textContent =
         `🪑 Table Number : ${tableNumber}`;
-
 
     }else{
 
@@ -1214,7 +1213,6 @@ window.onload = function(){
         document.getElementById("addressBox").style.display = "block";
 
         badge.style.display = "none";
-
 
     }
 
@@ -1415,9 +1413,6 @@ function selectOrderType(type){
     sendWhatsAppOrder();
 }
 
-}
-
-
 
 /* =========================
 SEND WHATSAPP ORDER
@@ -1478,13 +1473,7 @@ message +=
 
   });
 
-  const deliveryFee =
-  currentOrderType === "delivery"
-  ? 10
-  : 0;
-
-  const finalTotal =
-  subtotal + deliveryFee;
+const finalTotal = subtotal + 0;
 
   message +=
   `%0A💰 Total: ₹${finalTotal}`;
@@ -1499,10 +1488,10 @@ message +=
 
   }
 
-  window.open(
-    `https://wa.me/917901503548?text=${message}`,
-    "_blank"
-  );
+ window.open(
+  `https://wa.me/917901503548?text=${message}`,
+  "_blank"
+);
 
 }
 
