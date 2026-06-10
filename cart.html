@@ -939,14 +939,7 @@ id="paymentSection">
 
   <div style="display:flex;flex-direction:column;gap:12px;">
 
-    <button
-id="tableBtn"
-class="place-order"
-onclick="selectOrderType('table')">
-
-  Table Order
-
-</button>
+  
 
     <button class="place-order"
     style="background:#5f259f"
@@ -1178,6 +1171,11 @@ const tableNumber =
 let cart =
 JSON.parse(localStorage.getItem("cart")) || [];
 
+cart = cart.map(item => ({
+    ...item,
+    qty: item.qty || 1
+}));
+  
 /* =========================
 WINDOW LOAD
 ========================= */
@@ -1217,7 +1215,6 @@ if(tableNumber){
 
 }
 
-}
 /* =========================
 SIDEBAR
 ========================= */
