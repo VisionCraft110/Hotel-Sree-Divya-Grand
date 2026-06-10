@@ -1048,8 +1048,7 @@ Place Order on WhatsApp
         </div>
 
         <p>
-         must Upload payment
-          screenshot.
+         Upload payment screenshot.
         </p>
 
       </div>
@@ -1061,8 +1060,7 @@ Place Order on WhatsApp
         </div>
 
         <p>
-          Share your live
-          location.
+          Share your live location (for delivery orders).
         </p>
 
       </div>
@@ -1095,7 +1093,7 @@ Place Order on WhatsApp
   © 2026 Hotel Sree Divya Grand |
   All Rights Reserved.
 
-  <section style="margin-top:8px;">
+  <div style="margin-top:8px;">
     Designed by VC_VisionCraft
   </section>
 
@@ -1462,13 +1460,9 @@ else{
   orderTypeText = "🍽️ Table Order";
 }
 
-if(tableNumber){
-
-  message +=
-  `🪑 Table Number: ${tableNumber}%0A`;
-
+if(currentOrderType === "table" && tableNumber){
+  message += `🪑 Table Number: ${tableNumber}%0A`;
 }
-
 message +=
 `📦 Order Type: ${orderTypeText}%0A%0A`;
 
