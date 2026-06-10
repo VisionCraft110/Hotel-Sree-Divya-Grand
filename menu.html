@@ -572,9 +572,13 @@ window.location.search
 
 const tableNumber =
 params.get("table");
+console.log("URL Table:", tableNumber);
 
-/* TABLE */
-
+console.log(
+  "Saved Table:",
+  sessionStorage.getItem("tableNumber")
+);
+  
 if(tableNumber){
 
   sessionStorage.setItem(
@@ -582,19 +586,13 @@ if(tableNumber){
     tableNumber
   );
 
-}else{
-
-  sessionStorage.removeItem(
-    "tableNumber"
-  );
-
 }
 
-document.getElementById(
-"tableBadge"
-).textContent =
-"Table: " + (tableNumber || "--");
+const savedTable =
+sessionStorage.getItem("tableNumber");
 
+document.getElementById("tableBadge").textContent =
+"Table: " + (savedTable || "--");
 /* ELEMENTS */
 
 const menu =
@@ -607,7 +605,7 @@ document.getElementById("categories");
 
 let cart =
 JSON.parse(
-localStorage.getItem("cart")
+sessionStorage.getItem("cart")
 ) || [];
 
 /* STORE CURRENT DATA */
@@ -826,7 +824,7 @@ function render(){
 
 function saveCart(){
 
-  localStorage.setItem(
+  sessionStorage.setItem(
     "cart",
     JSON.stringify(cart)
   );
