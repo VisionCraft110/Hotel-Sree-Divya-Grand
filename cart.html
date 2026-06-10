@@ -937,40 +937,41 @@ id="paymentSection">
 
   <h3>Select Order Type</h3>
 
-<div style="display:flex;flex-direction:column;gap:12px;">
+  <div style="display:flex;flex-direction:column;gap:12px;">
 
-<button
-id="tableBtn"
-class="place-order"
-onclick="selectOrderType('table')">
-
-Dine In
-
-</button>
-
-<button
-id="takeawayBtn"
-class="place-order"
-style="background:#5f259f"
-onclick="selectOrderType('takeaway')">
-
-Takeaway
-
-</button>
-
-<button
-id="deliveryBtn"
-class="place-order"
-style="background:#ff6a00"
-onclick="selectOrderType('delivery')">
-
-Delivery
-
-</button>
-
-</div>
   
-  
+
+    <button class="place-order"
+    style="background:#5f259f"
+    onclick="selectOrderType('takeaway')">
+
+      Takeaway
+
+    </button>
+
+    <button class="place-order"
+    style="background:#ff6a00"
+    onclick="selectOrderType('delivery')">
+
+      Delivery
+
+    </button>
+
+  </div>
+
+
+
+  <!-- WHATSAPP BUTTON -->
+
+  <button
+id="tableOrderBtn"
+class="place-order"
+style="display:none;
+background:#25D366;">
+
+Place Order on WhatsApp
+
+</button>
 
 </div>
 
@@ -1168,7 +1169,7 @@ const tableNumber =
  : null;
 
 let cart =
-JSON.parse(sessionStorage.getItem("cart")) || [];
+JSON.parse(localStorage.getItem("cart")) || [];
 
 cart = cart.map(item => ({
     ...item,
@@ -1181,45 +1182,38 @@ WINDOW LOAD
 
 window.onload = function(){
 
-    const tableBtn = document.getElementById("tableBtn");
-    const takeawayBtn = document.getElementById("takeawayBtn");
-    const deliveryBtn = document.getElementById("deliveryBtn");
+  document.getElementById("addressBox").style.display = "none";
 
-    const badge =
-    document.getElementById("cartTableBadge");
+  const tableBtn =
+  document.getElementById("tableBtn");
 
-    if(tableNumber){
+  if(!tableNumber && tableBtn){
 
-        // QR Customer
+    tableBtn.style.display = "none";
 
-        tableBtn.style.display = "block";
-        takeawayBtn.style.display = "none";
-        deliveryBtn.style.display = "none";
+  }
 
-        document.getElementById("addressBox").style.display = "none";
+}
+const cartTableBadge =
+document.getElementById("cartTableBadge");
 
-        badge.style.display = "block";
-        badge.innerHTML =
-        `🪑 Table Number : ${tableNumber}`;
+if(tableNumber){
 
+  document.getElementById("addressBox").style.display = "none";
 
-    }else{
+  document.getElementById("paymentSection").style.display = "none";
 
-        // Normal Customer
+  document.getElementById("tableOrderBtn").style.display = "block";
 
-        tableBtn.style.display = "none";
-        takeawayBtn.style.display = "block";
-        deliveryBtn.style.display = "block";
+}else{
 
-        document.getElementById("addressBox").style.display = "block";
+  document.getElementById("addressBox").style.display = "block";
 
-        badge.style.display = "none";
+  document.getElementById("paymentSection").style.display = "block";
 
+  document.getElementById("tableOrderBtn").style.display = "none";
 
-    }
-
-};
-
+}
 
 /* =========================
 SIDEBAR
@@ -1365,7 +1359,7 @@ function changeQty(index,change){
 
   }
 
-  sessionStorage.setItem(
+  localStorage.setItem(
     "cart",
     JSON.stringify(cart)
   );
@@ -1382,7 +1376,7 @@ function removeItem(index){
 
   cart.splice(index,1);
 
-  sessionStorage.setItem(
+  localStorage.setItem(
     "cart",
     JSON.stringify(cart)
   );
@@ -1412,13 +1406,23 @@ function selectOrderType(type){
 
   }
 
-  if(type !== "table"){
-    sendWhatsAppOrder();
-}
+  sendWhatsAppOrder();
 
 }
 
+/* =========================
+TABLE ORDER BUTTON
+========================= */
 
+document
+.getElementById("tableOrderBtn")
+.onclick = function(){
+
+  currentOrderType = "table";
+
+  sendWhatsAppOrder();
+
+}
 
 /* =========================
 SEND WHATSAPP ORDER
@@ -1514,7 +1518,7 @@ function refreshCart(){
 
   cart =
   JSON.parse(
-    sessionStorage.getItem("cart")
+    localStorage.getItem("cart")
   ) || [];
 
   renderCart();
@@ -1529,7 +1533,7 @@ function clearCart(){
 
   if(confirmClear){
 
-    sessionStorage.removeItem("cart");
+    localStorage.removeItem("cart");
 
     location.reload();
 
