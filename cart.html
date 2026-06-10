@@ -1167,56 +1167,57 @@ const tableNumber =
  ? savedTable
  : null;
 
-let cart =
-JSON.parse(sessionStorage.getItem("cart")) || [];
+let cart = [];
+
+try {
+  cart = JSON.parse(sessionStorage.getItem("cart")) || [];
+} catch (e) {
+  cart = [];
+}
 
 cart = cart.map(item => ({
-    ...item,
-    qty: item.qty || 1
+  ...item,
+  qty: item.qty ? Number(item.qty) : 1
 }));
   
 /* =========================
 WINDOW LOAD
 ========================= */
 
-window.addEventListener("load", function(){
+window.addEventListener("load", function () {
 
-    const tableBtn = document.getElementById("tableBtn");
-    const takeawayBtn = document.getElementById("takeawayBtn");
-    const deliveryBtn = document.getElementById("deliveryBtn");
+  const tableNumber = sessionStorage.getItem("tableNumber");
 
-    const badge =
-    document.getElementById("cartTableBadge");
+  const tableBtn = document.getElementById("tableBtn");
+  const takeawayBtn = document.getElementById("takeawayBtn");
+  const deliveryBtn = document.getElementById("deliveryBtn");
+  const badge = document.getElementById("cartTableBadge");
+  const addressBox = document.getElementById("addressBox");
 
-    if(tableNumber){
+  if (tableNumber && tableNumber !== "null") {
 
-        // QR Customer
+    // QR USER → Dine-in ONLY
+    tableBtn.style.display = "block";
+    takeawayBtn.style.display = "none";
+    deliveryBtn.style.display = "none";
+    addressBox.style.display = "none";
 
-        tableBtn.style.display = "block";
-        takeawayBtn.style.display = "none";
-        deliveryBtn.style.display = "none";
+    badge.style.display = "block";
+    badge.textContent = `🪑 Table Number: ${tableNumber}`;
 
-        document.getElementById("addressBox").style.display = "none";
+  } else {
 
-        badge.style.display = "block";
-        badge.textContent =
-        `🪑 Table Number : ${tableNumber}`;
+    // NORMAL USER → NO DINE-IN
+    tableBtn.style.display = "none";
+    takeawayBtn.style.display = "block";
+    deliveryBtn.style.display = "block";
+    addressBox.style.display = "block";
 
-    }else{
+    badge.style.display = "none";
+  }
 
-        // Normal Customer
-
-        tableBtn.style.display = "none";
-        takeawayBtn.style.display = "block";
-        deliveryBtn.style.display = "block";
-
-        document.getElementById("addressBox").style.display = "block";
-
-        badge.style.display = "none";
-
-    }
-
-};
+  renderCart();
+});
 
 
 /* =========================
@@ -1395,22 +1396,13 @@ SELECT ORDER TYPE
 
 function selectOrderType(type){
 
-  currentOrderType = type;
-
-  const addressBox =
-  document.getElementById("addressBox");
-
-  if(type === "delivery"){
-
-    addressBox.style.display = "block";
-
-  }else{
-
-    addressBox.style.display = "none";
-
+  if(type === "table" && !sessionStorage.getItem("tableNumber")){
+    alert("Dine-in only available via QR table");
+    return;
   }
 
-    sendWhatsAppOrder();
+  currentOrderType = type;
+  sendWhatsAppOrder();
 }
 
 
