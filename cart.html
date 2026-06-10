@@ -970,27 +970,6 @@ Delivery
 
 </div>
   
-
-    <button class="place-order"
-    style="background:#5f259f"
-    onclick="selectOrderType('takeaway')">
-
-      Takeaway
-
-    </button>
-
-    <button class="place-order"
-    style="background:#ff6a00"
-    onclick="selectOrderType('delivery')">
-
-      Delivery
-
-    </button>
-
-  </div>
-
-
-
   <!-- WHATSAPP BUTTON -->
 
   <button
@@ -1212,36 +1191,42 @@ WINDOW LOAD
 
 window.onload = function(){
 
-    const tableBtn =
-    document.getElementById("tableBtn");
+    const tableBtn = document.getElementById("tableBtn");
+    const takeawayBtn = document.getElementById("takeawayBtn");
+    const deliveryBtn = document.getElementById("deliveryBtn");
 
-    const takeawayBtn =
-    document.getElementById("takeawayBtn");
-
-    const deliveryBtn =
-    document.getElementById("deliveryBtn");
+    const badge =
+    document.getElementById("cartTableBadge");
 
     if(tableNumber){
 
         // QR Customer
+
         tableBtn.style.display = "block";
-
         takeawayBtn.style.display = "none";
-
         deliveryBtn.style.display = "none";
 
         document.getElementById("addressBox").style.display = "none";
 
+        badge.style.display = "block";
+        badge.innerHTML =
+        `🪑 Table Number : ${tableNumber}`;
+
+        document.getElementById("tableOrderBtn").style.display = "block";
+
     }else{
 
         // Normal Customer
+
         tableBtn.style.display = "none";
-
         takeawayBtn.style.display = "block";
-
         deliveryBtn.style.display = "block";
 
         document.getElementById("addressBox").style.display = "block";
+
+        badge.style.display = "none";
+
+        document.getElementById("tableOrderBtn").style.display = "none";
 
     }
 
