@@ -1178,7 +1178,7 @@ const tableNumber =
  : null;
 
 let cart =
-JSON.parse(localStorage.getItem("cart")) || [];
+JSON.parse(sessionStorage.getItem("cart")) || [];
 
 cart = cart.map(item => ({
     ...item,
@@ -1388,7 +1388,7 @@ function changeQty(index,change){
 
   }
 
-  localStorage.setItem(
+  sessionStorage.setItem(
     "cart",
     JSON.stringify(cart)
   );
@@ -1405,7 +1405,7 @@ function removeItem(index){
 
   cart.splice(index,1);
 
-  localStorage.setItem(
+  sessionStorage.setItem(
     "cart",
     JSON.stringify(cart)
   );
@@ -1547,7 +1547,7 @@ function refreshCart(){
 
   cart =
   JSON.parse(
-    localStorage.getItem("cart")
+    sessionStorage.getItem("cart")
   ) || [];
 
   renderCart();
@@ -1562,7 +1562,7 @@ function clearCart(){
 
   if(confirmClear){
 
-    localStorage.removeItem("cart");
+    sessionStorage.removeItem("cart");
 
     location.reload();
 
