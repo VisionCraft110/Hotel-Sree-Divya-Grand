@@ -970,17 +970,7 @@ Delivery
 
 </div>
   
-  <!-- WHATSAPP BUTTON -->
-
-  <button
-id="tableOrderBtn"
-class="place-order"
-style="display:none;
-background:#25D366;">
-
-Place Order on WhatsApp
-
-</button>
+  
 
 </div>
 
@@ -1212,7 +1202,6 @@ window.onload = function(){
         badge.innerHTML =
         `🪑 Table Number : ${tableNumber}`;
 
-        document.getElementById("tableOrderBtn").style.display = "block";
 
     }else{
 
@@ -1226,23 +1215,11 @@ window.onload = function(){
 
         badge.style.display = "none";
 
-        document.getElementById("tableOrderBtn").style.display = "none";
 
     }
 
 };
-const cartTableBadge =
-document.getElementById("cartTableBadge");
 
-if(tableNumber){
-
-    document.getElementById("tableOrderBtn").style.display = "block";
-
-}else{
-
-    document.getElementById("tableOrderBtn").style.display = "none";
-
-}
 
 /* =========================
 SIDEBAR
@@ -1435,23 +1412,13 @@ function selectOrderType(type){
 
   }
 
-  sendWhatsAppOrder();
+  if(type !== "table"){
+    sendWhatsAppOrder();
+}
 
 }
 
-/* =========================
-TABLE ORDER BUTTON
-========================= */
 
-document
-.getElementById("tableOrderBtn")
-.onclick = function(){
-
-  currentOrderType = "table";
-
-  sendWhatsAppOrder();
-
-}
 
 /* =========================
 SEND WHATSAPP ORDER
