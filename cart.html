@@ -1166,8 +1166,8 @@ GLOBAL VARIABLES
 let currentOrderType = "";
 
 const savedTable =
-localStorage.getItem("tableNumber");
-
+sessionStorage.getItem("tableNumber");
+  
 const tableNumber =
 (savedTable &&
  savedTable !== "null" &&
@@ -1201,11 +1201,21 @@ document.getElementById("cartTableBadge");
 
 if(tableNumber){
 
-  cartTableBadge.style.display =
-  "block";
+  document.getElementById("addressBox").style.display = "none";
 
-  cartTableBadge.textContent =
-  " Table: " + tableNumber;
+  document.getElementById("paymentSection").style.display = "none";
+
+  document.getElementById("tableOrderBtn").style.display = "block";
+
+}else{
+
+  document.getElementById("addressBox").style.display = "block";
+
+  document.getElementById("paymentSection").style.display = "block";
+
+  document.getElementById("tableOrderBtn").style.display = "none";
+
+}
 
 }
 /* =========================
@@ -1498,7 +1508,7 @@ message +=
   }
 
   window.open(
-    `https://wa.me/918543293411?text=${message}`,
+    `https://wa.me/917901503548?text=${message}`,
     "_blank"
   );
 
