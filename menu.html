@@ -577,9 +577,15 @@ params.get("table");
 
 if(tableNumber){
 
-  localStorage.setItem(
+  sessionStorage.setItem(
     "tableNumber",
     tableNumber
+  );
+
+}else{
+
+  sessionStorage.removeItem(
+    "tableNumber"
   );
 
 }
