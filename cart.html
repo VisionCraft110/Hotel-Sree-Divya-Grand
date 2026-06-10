@@ -867,7 +867,8 @@ footer{
   </h2>
 
   <button
-    onclick="refreshCart()"
+    
+onclick="clearCart()"
     class="glass"
     style="
       width:50px;
@@ -1291,11 +1292,7 @@ WINDOW LOAD
 
 window.onload = function(){
 
-  if(tableNumber){
-
   document.getElementById("addressBox").style.display = "none";
-
-}
 
   const tableBtn =
   document.getElementById("tableBtn");
@@ -1497,6 +1494,19 @@ function selectOrderType(type){
 
   currentOrderType = type;
 
+  const addressBox =
+  document.getElementById("addressBox");
+
+  if(type === "delivery"){
+
+    addressBox.style.display = "block";
+
+  }else{
+
+    addressBox.style.display = "none";
+
+  }
+
   sendWhatsAppOrder();
 
 }
@@ -1546,34 +1556,28 @@ function sendWhatsAppOrder(){
   let message =
   "🍽️ *Hotel Sree Divya Grand Order*%0A%0A";
 
-  if(tableNumber){
+  let orderTypeText = "";
 
-    message +=
-    `🪑 Table Number: ${tableNumber}%0A`;
+if(currentOrderType === "delivery"){
+  orderTypeText = "🚚 Delivery";
+}
+else if(currentOrderType === "takeaway"){
+  orderTypeText = "🥡 Takeaway";
+}
+else{
+  orderTypeText = "🍽️ Table Order";
+}
 
-    message +=
-    `📦 Order Type: Table Order%0A%0A`;
+if(tableNumber){
 
-  }
+  message +=
+  `🪑 Table Number: ${tableNumber}%0A`;
 
-  else{
+}
 
-    let orderTypeText = "";
+message +=
+`📦 Order Type: ${orderTypeText}%0A%0A`;
 
-    if(currentOrderType === "delivery"){
-      orderTypeText = "🚚 Delivery";
-    }
-    else if(currentOrderType === "takeaway"){
-      orderTypeText = "🥡 Takeaway";
-    }
-    else{
-      orderTypeText = "🍽️ Table Order";
-    }
-
-    message +=
-    `📦 Order Type: ${orderTypeText}%0A%0A`;
-
-  }
 
   cart.forEach(item=>{
 
@@ -1626,7 +1630,7 @@ function refreshCart(){
 
 }
 
-function refreshCart(){
+function clearCart(){
 
   const confirmClear = confirm(
     "Are you sure you want to clear all cart items?"
