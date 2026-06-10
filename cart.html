@@ -1402,6 +1402,10 @@ function selectOrderType(type){
   }
 
   currentOrderType = type;
+
+  // highlight debug
+  console.log("Order type selected:", type);
+
   sendWhatsAppOrder();
 }
 
@@ -1417,10 +1421,7 @@ function sendWhatsAppOrder(){
     return;
   }
 
-  if(
-    currentOrderType === "delivery" &&
-    !tableNumber
-  ){
+  if (currentOrderType === "delivery") {
 
     const address =
     document.querySelector("textarea").value;
